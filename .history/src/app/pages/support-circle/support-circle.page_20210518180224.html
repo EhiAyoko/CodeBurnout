@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Support Circle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="ion-text-center ion-padding-top">
+  <img src="assets/img/4.png">
+</div>
+<div class="ion-text-center">
+  <h2 class="h111">Build Your Support Circle</h2>
+</div>
+
+<ion-button *ngIf="!persons"  expand="block" color="tertiary" class="ion-padding-start ion-padding-end btn1">
+  ADD A PERSON
+</ion-button>
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle class="cs1">My Circle of Support</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content class="ion-no-padding">
+    <ion-item *ngFor="let item of persons; let i = index;">
+      <div *ngIf='item.fields.userid === userid'></div>
+      <ion-avatar slot="start" class="ava">
+        <img src="assets/img/11.png">
+      </ion-avatar>
+      <ion-label slot="end" class="ion-text-end lab1">{{item.fields.relationship}}</ion-label>
+      <ion-icon color="primary" slot="end" name="create-outline" *ngIf="editbtn" (click)="edititem(item)"></ion-icon>
+
+      <ion-label class="h22">
+        {{item.fields.Name}}
+      </ion-label>
+    </ion-item>
+    <hr>
+    <ion-button  fill="clear" (click)="editPerson()">
+      EDIT
+    </ion-button>
+    <ion-button  fill="clear" (click)="addPerson()">
+      ADD A PERSON
+    </ion-button>
+  </ion-card-content>
+
+</ion-card>
+
+</ion-content>

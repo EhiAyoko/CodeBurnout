@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button defaultHref="blog"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{blogdetails.fields.Title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-padding-top list1" >
+    <div class="ava" *ngFor="let postimg of blogdetails.fields.FeaturedPhoto">
+      <img  [src]="postimg.url">
+    </div>
+    <ion-item (click)="blogdetails(item)" lines="none">
+      <ion-label>
+        <h2 class="h22">{{blogdetails.fields.Title}}</h2>
+        <p class="p1">{{blogdetails.fields.Author}}</p>
+        <p class="p1 ion-text-wrap" >{{blogdetails.fields.BlogPost}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

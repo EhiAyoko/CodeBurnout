@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first" color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Code Burnout Blog</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search" class="se" (click)="search1()"></ion-icon>
+    </ion-buttons>
+    <ion-searchbar class="sear1" *ngIf="search == true" type="text" color="light" placeholder="Search text" clearInput>
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="ion-text-center ion-padding-top">
+  <img src="assets/img/7.png">
+</div>
+
+<ion-list class="ion-padding-top list1">
+  <ion-item *ngFor="let item of posts" >
+    <ion-avatar slot="start" class="ava" *ngIf="item.fields.Featuredphoto; else noPic"  >
+
+      <img *ngFor="let itempic of item.fields.Featuredphoto" [src]="itempic.url">
+
+  </ion-avatar>
+
+
+<ng-template #noPic>
+  <ion-avatar slot="start" class="ava">
+    <img src="assets/img/10.png">
+  </ion-avatar>
+</ng-template>
+    <ion-label>
+      <h2 class="h22">{{item.fields.Title}}</h2>
+      <p class="p1">{{item.fields.Author}}</p>
+    </ion-label>
+  </ion-item>
+
+  <!-- <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/11.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">The effects of remote working on</h2>
+      <p class="p1">Olivia Wieseler</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/12.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">Feeling Left Out?</h2>
+      <p class="p1">Code Burnout Team</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/13.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">5 quick tips on how you can start to</h2>
+      <p class="p1">Code Burnout Team</p>
+    </ion-label>
+  </ion-item> -->
+
+</ion-list>
+</ion-content>

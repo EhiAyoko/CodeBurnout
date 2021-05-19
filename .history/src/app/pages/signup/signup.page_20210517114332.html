@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div class="ion-padding ion-text-center">
+    <img class="inng" src="assets/img/fdbdfbd.png">
+  </div>
+  <form >
+ <div class="pos-set">
+  <ion-item  class="brd1 ion-margin" >
+    <ion-label position="floating">Name</ion-label>
+    <ion-input  type="text" id="username" #email required></ion-input>
+  </ion-item>
+  <ion-item  class="brd1 ion-margin" >
+    <ion-label position="floating">Email</ion-label>
+    <ion-input   type="email" id="email" #email required ></ion-input>
+  </ion-item>
+  <ion-item  class="brd ion-margin" >
+    <ion-label position="floating">Password</ion-label>
+    <ion-input  type="password" id="password" required ></ion-input>
+  </ion-item>
+  <ion-item  class="brd ion-margin" >
+    <ion-label position="floating">Confirm Password</ion-label>
+    <ion-input  type="password" id="confirm-password" required  #confirmPassword></ion-input>
+    <!-- <span >Passwords do not match</span> -->
+  </ion-item>
+  <div class="tyu">
+    <ion-button (click)="logIn(email, password)" type="submit"  expand="block" class="btn ion-margin">
+      Sign Up
+    </ion-button>
+  </div>
+</div>
+</form>
+
+
+
+</ion-content>

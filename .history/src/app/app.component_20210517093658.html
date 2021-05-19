@@ -1,0 +1,46 @@
+<ion-app>
+
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Code Burnout</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle menu="first">
+          <ion-item lines="none" >
+            <ion-icon slot="start" name="list-outline"></ion-icon>
+            <ion-label>Explore Activities</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle menu="first">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="list-outline"></ion-icon>
+            <ion-label>Team Activities</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle menu="first">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="list-outline"></ion-icon>
+            <ion-label>Saved Activities</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle menu="first">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="people-outline"></ion-icon>
+            <ion-label>Support Circle</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle menu="first">
+          <ion-item lines="none" button>
+            <ion-icon slot="start" name="exit"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

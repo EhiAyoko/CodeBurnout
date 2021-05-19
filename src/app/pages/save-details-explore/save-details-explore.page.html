@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons mode="md" slot="start">
+      <ion-back-button [text]="login" defaultHref="explore-activities"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size: 10px;">{{brandsdetails.fields.Name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin">
+    <div *ngFor="let postimg of brandsdetails.fields.Featuredphoto">
+    <div>
+      <img [src]="postimg.url">
+    </div>
+    <div class="ion-margin">
+      <ion-text class="">
+        {{brandsdetails.fields.Notes}}
+      </ion-text>
+    </div>
+    <ion-item class="brd" lines="none">
+      <ion-label>Save Activity</ion-label>
+      <ion-toggle mode="ios" checked="{{brandsdetails.fields.Save === true ? true : false}}" (ionChange)="crazyEvent($event,brandsdetails,postimg)" color="warning"></ion-toggle>
+    </ion-item>
+  </div>
+</div>
+</ion-content>

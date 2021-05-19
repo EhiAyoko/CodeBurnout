@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!search">Saved Activities</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search" class="se ser" (click)="search1()"></ion-icon>
+    </ion-buttons>
+    <ion-searchbar  class="sear1" *ngIf="search" type="text" placeholder="Search text" clearInput>
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="ion-text-center ion-padding-top">
+  <img src="assets/img/3.png">
+</div>
+<ion-item class="brd ion-margin" lines="none">
+  <ion-label class="label1">Filter</ion-label>
+  <ion-select >
+    <ion-select-option>Self Reflection Activity</ion-select-option>
+    <ion-select-option>Communities To Join</ion-select-option>
+    <ion-select-option>Self Care Activities</ion-select-option>
+    <ion-select-option>Individual Activity</ion-select-option>
+    <ion-select-option>Continuous Education</ion-select-option>
+    <ion-select-option>Awareness</ion-select-option>
+    <ion-select-option>Team Bonding</ion-select-option>
+    <ion-select-option>Handling Conflict</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+<ion-list class="ion-padding-top">
+  <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/8.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">Mentor Newer People</h2>
+      <p class="p1">Continous Education</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/11.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">Challenging moments</h2>
+      <p class="p1">Self Reflection Activity</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/12.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">Becoming an Advocate</h2>
+      <p class="p1">Awareness</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/13.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">LGBTQ in Technology</h2>
+      <p class="p1">Communities To Join</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-avatar slot="start" class="ava">
+      <img src="assets/img/10.png">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="h22">Playlist for Work</h2>
+      <p class="p1">Self Care Activities</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+</ion-content>

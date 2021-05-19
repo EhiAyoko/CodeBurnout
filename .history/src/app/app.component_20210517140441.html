@@ -1,0 +1,23 @@
+<ion-app>
+
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="warning">
+        <ion-title color="light">Code Burnout</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-menu-toggle>
+        <ion-list>
+          <ion-item (click)="dashboardpage()">Dashboard</ion-item>
+          <ion-item (click)="SavedActivitiespage()">Saved Activities</ion-item>
+          <ion-item (click)="BrowseActivitiespage()">Browse Activities</ion-item>
+          <ion-item (click)="teamactivities()">Team Activities</ion-item>
+          <ion-item (click)="supportCircle()">Support Circle</ion-item>
+          <ion-item (click)="blogpage()">Blog</ion-item>
+        </ion-list>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

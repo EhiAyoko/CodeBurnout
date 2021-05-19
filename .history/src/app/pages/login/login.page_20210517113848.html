@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+<div class="ion-padding ion-text-center tyu">
+  <img class="inng" src="assets/img/fdbdfbd.png">
+</div>
+
+<div class="hj">
+<form>
+<ion-item  class="brd1 ion-margin" lines="none">
+  <ion-label position="floating">Email</ion-label>
+  <ion-input type="text" #email required></ion-input>
+</ion-item>
+<ion-item  class="brd ion-margin" lines="none">
+  <ion-label position="floating">Password</ion-label>
+  <ion-input type="password" #password required></ion-input>
+</ion-item>
+<div class="poss">
+  <ion-button (click)="logIn(email, password)" type="submit"  expand="block" class="btn ion-margin">
+    Log in
+  </ion-button>
+  <ion-button (click)="register()" expand="full" fill="clear" class="ion-margin">
+    Or create an account
+  </ion-button>
+</div>
+</form>
+</div>
+</ion-content>

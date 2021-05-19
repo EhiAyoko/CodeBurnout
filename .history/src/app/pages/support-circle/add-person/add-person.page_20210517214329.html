@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button defaultHref="support-circle"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add a Person</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search" class="se"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="ion-text-center ion-padding-top">
+  <img src="assets/img/6.png">
+</div>
+
+<div class="ion-padding-top ion-padding-start">
+  <ion-text>
+    <h3>
+      Add Person
+    </h3>
+  </ion-text>
+</div>
+<form >
+  <ion-item>
+    <ion-icon slot="start" name="person"></ion-icon>
+    <ion-input required type="text" [(ngModel)]="data.Name" name = "Name" placeholder="Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input required type="text" [(ngModel)]="data.phone_number" name = "phone_number" placeholder="Phone Number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input required type="text" [(ngModel)]="data.relationship" name = "relationship" placeholder="Relationship"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="addCircle()"  expand="block" color="tertiary" class="ion-padding-start ion-padding-end btn1">
+    ADD PERSON
+  </ion-button>
+</form>
+</ion-content>
