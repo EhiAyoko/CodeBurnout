@@ -390,11 +390,12 @@ Ng2SearchPipeModule.ctorParameters = () => [];
 /*!******************************************************!*\
   !*** ./src/app/services/auth/authication.service.ts ***!
   \******************************************************/
-/*! exports provided: AuthicationService */
+/*! exports provided: TODO, AuthicationService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TODO", function() { return TODO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthicationService", function() { return AuthicationService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
@@ -408,6 +409,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+class TODO {
+}
 let AuthicationService = class AuthicationService {
     constructor(afStore, ngFireAuth, router, ngZone, loadingCtrl) {
         this.afStore = afStore;
@@ -416,6 +419,7 @@ let AuthicationService = class AuthicationService {
         this.ngZone = ngZone;
         this.loadingCtrl = loadingCtrl;
         this.isLoading = false;
+        this.collectionName = 'Records';
     }
     // Login in with email/password
     SignIn(email, password) {
@@ -453,12 +457,19 @@ let AuthicationService = class AuthicationService {
     signupUser(user) {
         return this.ngFireAuth.createUserWithEmailAndPassword(user.email, user.password)
             .catch(function (error) {
-            // Handle Errors here.
-            //var errorCode = error.code;
-            //var errorMessage = error.message;
-            console.log(error);
-            // ...
+            // console.log(error);
         });
+    }
+    read_students() {
+        return this.afStore.collection(this.collectionName).snapshotChanges();
+    }
+    getActivity(userId, branddetailid) {
+        return this.afStore.firestore.collection('Team_activities_saved/' + userId + '/activity').doc(branddetailid)
+            .get();
+    }
+    exploreActivity(userId, branddetailid) {
+        return this.afStore.firestore.collection('Explore_activities_saved/' + userId + '/activity').doc(branddetailid)
+            .get();
     }
 };
 AuthicationService.ctorParameters = () => [

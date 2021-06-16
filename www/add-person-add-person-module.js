@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 16px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.list1 {\n  padding-top: 65px;\n}\n\n.btn1 {\n  --border-radius: 4px;\n  margin-top: 45px;\n  height: 50px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcYWRkLXBlcnNvbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLHFCQUFxQjtBQUN2Qjs7QUFHQTtFQUNFLFlBQVk7RUFDWixXQUFXO0FBQWI7O0FBR0E7RUFDRSxlQUFlO0VBQ2YsZ0JBQWdCO0FBQWxCOztBQUdBO0VBQ0UsZUFBZTtBQUFqQjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixlQUFlO0FBQ2pCOztBQUNBO0VBQ0UsaUJBQWlCO0FBRW5COztBQUNBO0VBQ0Usb0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixZQUFZO0FBRWQiLCJmaWxlIjoiYWRkLXBlcnNvbi5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2Uge1xyXG4gIHBhZGRpbmctcmlnaHQ6IDVweDtcclxuICBmb250LXNpemU6IDI1cHg7XHJcbn1cclxuXHJcbi5icmR7XHJcbiAgYm9yZGVyOiBzb2xpZCAjZWFlOGU4O1xyXG5cclxufVxyXG5cclxuLmF2YSB7XHJcbiAgaGVpZ2h0OiA2NXB4O1xyXG4gIHdpZHRoOiA2NXB4O1xyXG59XHJcblxyXG4ucDEge1xyXG4gIGZvbnQtc2l6ZTogMTZweDtcclxuICBwYWRkaW5nLXRvcDogNHB4O1xyXG59XHJcblxyXG4uaDIyIHtcclxuICBmb250LXNpemU6IDE4cHg7XHJcbn1cclxuLmxhYmVsMSB7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG59XHJcbi5saXN0MSB7XHJcbiAgcGFkZGluZy10b3A6IDY1cHg7XHJcbn1cclxuXHJcbi5idG4xIHtcclxuICAtLWJvcmRlci1yYWRpdXM6IDRweDtcclxuICBtYXJnaW4tdG9wOiA0NXB4O1xyXG4gIGhlaWdodDogNTBweDtcclxufVxyXG5cclxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 16px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.list1 {\n  padding-top: 65px;\n}\n\n.btn1 {\n  --border-radius: 4px;\n  margin-top: 45px;\n  height: 50px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcYWRkLXBlcnNvbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBQTtFQUNBLGVBQUE7QUFDRjs7QUFFQTtFQUNFLHFCQUFBO0FBQ0Y7O0FBR0E7RUFDRSxZQUFBO0VBQ0EsV0FBQTtBQUFGOztBQUdBO0VBQ0UsZUFBQTtFQUNBLGdCQUFBO0FBQUY7O0FBR0E7RUFDRSxlQUFBO0FBQUY7O0FBRUE7RUFDRSxpQkFBQTtFQUNBLGVBQUE7QUFDRjs7QUFDQTtFQUNFLGlCQUFBO0FBRUY7O0FBQ0E7RUFDRSxvQkFBQTtFQUNBLGdCQUFBO0VBQ0EsWUFBQTtBQUVGIiwiZmlsZSI6ImFkZC1wZXJzb24ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNlIHtcclxuICBwYWRkaW5nLXJpZ2h0OiA1cHg7XHJcbiAgZm9udC1zaXplOiAyNXB4O1xyXG59XHJcblxyXG4uYnJke1xyXG4gIGJvcmRlcjogc29saWQgI2VhZThlODtcclxuXHJcbn1cclxuXHJcbi5hdmEge1xyXG4gIGhlaWdodDogNjVweDtcclxuICB3aWR0aDogNjVweDtcclxufVxyXG5cclxuLnAxIHtcclxuICBmb250LXNpemU6IDE2cHg7XHJcbiAgcGFkZGluZy10b3A6IDRweDtcclxufVxyXG5cclxuLmgyMiB7XHJcbiAgZm9udC1zaXplOiAxOHB4O1xyXG59XHJcbi5sYWJlbDEge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIGZvbnQtc2l6ZTogMjBweDtcclxufVxyXG4ubGlzdDEge1xyXG4gIHBhZGRpbmctdG9wOiA2NXB4O1xyXG59XHJcblxyXG4uYnRuMSB7XHJcbiAgLS1ib3JkZXItcmFkaXVzOiA0cHg7XHJcbiAgbWFyZ2luLXRvcDogNDVweDtcclxuICBoZWlnaHQ6IDUwcHg7XHJcbn1cclxuXHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -136,14 +136,14 @@ let AddPersonPage = class AddPersonPage {
         this.count = 0;
         let currentUser = localStorage.getItem('LoginData');
         this.currentUser = JSON.parse(currentUser);
-        console.log("CurentUser", this.currentUser);
+        // console.log("CurentUser",this.currentUser);
         this.data.userid = this.currentUser.user.uid;
     }
     ngOnInit() {
         // this.addCircle()
         this.circleService.circleGet().subscribe((circles) => {
             this.circles = circles;
-            console.log('circles', this.circles);
+            // console.log('circles',this.circles);
             for (var circle of this.circles) {
                 if (circle.fields.userid === this.data.userid) {
                     this.count++;
@@ -167,7 +167,7 @@ let AddPersonPage = class AddPersonPage {
                     }
                 ]
             };
-            console.log(this.count);
+            // console.log(this.count);
             if (this.count < 5) {
                 this.postapiaittable1(obj);
                 this.loading = yield this.loadingController.create({
@@ -188,10 +188,10 @@ let AddPersonPage = class AddPersonPage {
         let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]();
         headers = this.createAuthorizationHeader1(headers);
         const body = toggleValue;
-        console.log('body', body);
+        // console.log('body',body)
         this.httpClient.post('https://api.airtable.com/v0/appSaPUQYwoPVm8Ny/Table%201', body, { headers }).subscribe((data) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.postId = data;
-            console.log('this.postAPI', this.postId);
+            // console.log('this.postAPI', this.postId);
             this.navclrl.navigateRoot('support-circle');
             this.loading.dismiss();
         }));

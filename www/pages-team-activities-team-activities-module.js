@@ -54,7 +54,7 @@ TeamActivitiesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\" mode=\"md\">\r\n      <ion-back-button defaultHref=\"dashboard\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title >Team Activities</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-icon name=\"search\" class=\"se\" (click)=\"search1()\"></ion-icon>\r\n    </ion-buttons>\r\n    <ion-searchbar [(ngModel)]=\"filterTerm\" class=\"sear1\" *ngIf=\"search == true\" type=\"text\" color=\"light\" placeholder=\"Search text\" clearInput>\r\n    </ion-searchbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n<div class=\"ion-text-center ion-padding-top\">\r\n  <img src=\"assets/img/2.png\">\r\n</div>\r\n<ion-item class=\"brd ion-margin\" lines=\"none\">\r\n  <ion-label class=\"label1\">Filter</ion-label>\r\n    <ion-select [(ngModel)]=\"selectedvalue\" (ionChange)=\"OnChange($event)\">\r\n      <ion-select-option *ngFor=\"let post of postfil\">{{post}}</ion-select-option>\r\n    </ion-select>\r\n</ion-item>\r\n\r\n<ion-list class=\"ion-padding-top\">\r\n  <ion-item *ngFor=\"let item of teams | filter:filterTerm\" (click)=\"teamdetails(item)\">\r\n    <ion-avatar slot=\"start\" class=\"ava\" *ngFor=\"let postimg of item.fields.FeaturedPhoto\">\r\n      <img [src]=\"postimg.url\">\r\n    </ion-avatar>\r\n    <ion-label>\r\n      <h2 class=\"h22\">{{item.fields.Name}}</h2>\r\n      <p class=\"p1\">{{item.fields.ActivityCategory}}</p>\r\n    </ion-label>\r\n  </ion-item>\r\n</ion-list>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar mode=\"ios\">\r\n    <ion-buttons slot=\"start\" mode=\"md\">\r\n      <ion-back-button defaultHref=\"dashboard\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title >Team Activities</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-icon name=\"search\" class=\"se\" (click)=\"search1()\"></ion-icon>\r\n    </ion-buttons>\r\n    <ion-searchbar [(ngModel)]=\"filterTerm\" class=\"sear1\" *ngIf=\"search == true\" type=\"text\" color=\"light\" placeholder=\"Search text\" clearInput>\r\n    </ion-searchbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n<div class=\"ion-text-center ion-padding-top\">\r\n  <img src=\"assets/img/2.png\">\r\n</div>\r\n<ion-item class=\"brd ion-margin\" lines=\"none\">\r\n  <ion-label class=\"label1\">Filter</ion-label>\r\n    <ion-select [(ngModel)]=\"selectedvalue\" (ionChange)=\"OnChange($event)\">\r\n      <ion-select-option *ngFor=\"let post of postfil\">{{post}}</ion-select-option>\r\n    </ion-select>\r\n</ion-item>\r\n\r\n<ion-list class=\"ion-padding-top\">\r\n  <ion-item *ngFor=\"let item of teams | filter:filterTerm\" (click)=\"teamdetails(item)\">\r\n    <ion-avatar slot=\"start\" class=\"ava\" *ngFor=\"let postimg of item.fields.FeaturedPhoto\">\r\n      <img [src]=\"postimg.url\">\r\n    </ion-avatar>\r\n    <ion-label>\r\n      <h2 class=\"h22\">{{item.fields.Name}}</h2>\r\n      <p class=\"p1\">{{item.fields.ActivityCategory}}</p>\r\n    </ion-label>\r\n  </ion-item>\r\n</ion-list>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -67,7 +67,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 16px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.sear1 {\n  padding-top: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFx0ZWFtLWFjdGl2aXRpZXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQWtCO0VBQ2xCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxxQkFBcUI7QUFDdkI7O0FBR0E7RUFDRSxZQUFZO0VBQ1osV0FBVztBQUFiOztBQUdBO0VBQ0UsZUFBZTtFQUNmLGdCQUFnQjtBQUFsQjs7QUFHQTtFQUNFLGVBQWU7QUFBakI7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsZUFBZTtBQUNqQjs7QUFDQTtFQUNFLGlCQUFpQjtBQUVuQiIsImZpbGUiOiJ0ZWFtLWFjdGl2aXRpZXMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNlIHtcclxuICBwYWRkaW5nLXJpZ2h0OiA1cHg7XHJcbiAgZm9udC1zaXplOiAyNXB4O1xyXG59XHJcblxyXG4uYnJke1xyXG4gIGJvcmRlcjogc29saWQgI2VhZThlODtcclxuXHJcbn1cclxuXHJcbi5hdmEge1xyXG4gIGhlaWdodDogNjVweDtcclxuICB3aWR0aDogNjVweDtcclxufVxyXG5cclxuLnAxIHtcclxuICBmb250LXNpemU6IDE2cHg7XHJcbiAgcGFkZGluZy10b3A6IDRweDtcclxufVxyXG5cclxuLmgyMiB7XHJcbiAgZm9udC1zaXplOiAxOHB4O1xyXG59XHJcbi5sYWJlbDEge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIGZvbnQtc2l6ZTogMjBweDtcclxufVxyXG4uc2VhcjEge1xyXG4gIHBhZGRpbmctdG9wOiAxMHB4O1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 16px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.sear1 {\n  padding-top: 10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFx0ZWFtLWFjdGl2aXRpZXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxlQUFBO0FBQ0Y7O0FBRUE7RUFDRSxxQkFBQTtBQUNGOztBQUdBO0VBQ0UsWUFBQTtFQUNBLFdBQUE7QUFBRjs7QUFHQTtFQUNFLGVBQUE7RUFDQSxnQkFBQTtBQUFGOztBQUdBO0VBQ0UsZUFBQTtBQUFGOztBQUVBO0VBQ0UsaUJBQUE7RUFDQSxlQUFBO0FBQ0Y7O0FBQ0E7RUFDRSxpQkFBQTtBQUVGIiwiZmlsZSI6InRlYW0tYWN0aXZpdGllcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2Uge1xyXG4gIHBhZGRpbmctcmlnaHQ6IDVweDtcclxuICBmb250LXNpemU6IDI1cHg7XHJcbn1cclxuXHJcbi5icmR7XHJcbiAgYm9yZGVyOiBzb2xpZCAjZWFlOGU4O1xyXG5cclxufVxyXG5cclxuLmF2YSB7XHJcbiAgaGVpZ2h0OiA2NXB4O1xyXG4gIHdpZHRoOiA2NXB4O1xyXG59XHJcblxyXG4ucDEge1xyXG4gIGZvbnQtc2l6ZTogMTZweDtcclxuICBwYWRkaW5nLXRvcDogNHB4O1xyXG59XHJcblxyXG4uaDIyIHtcclxuICBmb250LXNpemU6IDE4cHg7XHJcbn1cclxuLmxhYmVsMSB7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG59XHJcbi5zZWFyMSB7XHJcbiAgcGFkZGluZy10b3A6IDEwcHg7XHJcbn1cclxuIl19 */");
 
 /***/ }),
 
@@ -161,19 +161,19 @@ let TeamActivitiesPage = class TeamActivitiesPage {
     loadActivity() {
         this.http.getTeams().subscribe((res) => {
             // console.log(res);
-            console.log(res);
+            // console.log(res);
             this.teams = res;
             this.postsPre = this.teams;
             this.postfil = this.postsPre.map(item => item.fields.ActivityCategory)
                 .filter((value, index, self) => self.indexOf(value) === index);
-            console.log(this.teams);
-            console.log('this map', this.postfil);
+            // console.log(this.teams);
+            // console.log('this map',this.postfil)
         }, error => {
             console.log(error);
         });
     }
     OnChange(searchbar) {
-        console.log('mnmnnm', searchbar);
+        // console.log('mnmnnm', searchbar)
         // set q to the value of the searchbar
         var q = searchbar.detail.value;
         // if the value is an empty string don't filter the items
@@ -181,7 +181,7 @@ let TeamActivitiesPage = class TeamActivitiesPage {
             return;
         }
         this.teams = this.postsPre.filter(item => item.fields.ActivityCategory === q);
-        console.log("This Items", this.teams);
+        // console.log("This Items",this.teams);
     }
     teamdetails(item) {
         let navigationExtras = {

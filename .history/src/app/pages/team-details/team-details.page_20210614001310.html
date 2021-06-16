@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons mode="md" slot="start">
+      <ion-back-button [text]="login" defaultHref="team-details"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size: 10px;"> {{brandsdetails.fields.Name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin">
+    <div class="ion-text-center" *ngFor="let postvideo of brandsdetails.fields.Video" > 
+      <div (click)="onClick(postvideo)">
+        <video width="320" height="240" controls>
+          <source [src]="postvideo.url" [type]="postvideo.type">
+        </video>
+      </div>
+    
+    </div>
+
+    <div *ngFor="let postimg of brandsdetails.fields.FeaturedPhoto" >
+      <img [src]="postimg.url">
+
+    <div class="ion-margin">
+      <ion-text class="">
+        {{brandsdetails.fields.description}}
+      </ion-text>
+    </div>
+    <div class="ion-margin">
+      <ion-text class="sett">
+          {{brandsdetails.fields.Prep}}
+      </ion-text>
+    </div><br>
+
+    <div class="rtre" >
+      <ion-item class="brd" lines="none">
+        <ion-label >Save Activity</ion-label>
+  <ion-toggle mode="ios" checked="{{brandsdetails.fields.Save === true ? true : false}}" (ionChange)="firebaseEvent($event,brandsdetails,postimg)" color="warning"></ion-toggle>
+</ion-item>
+
+<ion-item class="brd" lines="none" (click)="sShare(postimg,brandsdetails)">
+  <ion-label>Share</ion-label>
+  <ion-icon name="share-outline"></ion-icon>
+</ion-item>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<ion-item  class="align-items-center" *ngFor="let record of records;">
+  <ion-text >
+    {{record.Name}}
+  </ion-text>
+  <ion-button color="primary" (click)="DeleteRecord(record.id)">cancel</ion-button>
+</ion-item> -->
+</ion-content>

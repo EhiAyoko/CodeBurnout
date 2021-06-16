@@ -123,20 +123,20 @@ let SignupPage = class SignupPage {
             if (this.myForm.value.password == this.myForm.value.confirmPassword) {
                 this.ngFireAuth.createUserWithEmailAndPassword(this.myForm.value.email, this.myForm.value.password)
                     .then((res) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                    console.log('res', res);
+                    // console.log('res', res)
                     localStorage.setItem('LoginData', JSON.stringify(res));
                     this.loading = yield this.loadingController.create({
                         message: 'Please Wait...'
                     });
                     this.loading.present();
                     let userId = (yield this.ngFireAuth.currentUser).uid;
-                    console.log('userId for signup', userId);
+                    // console.log('userId for signup', userId)
                     let userDoc = this.db.doc('users/' + userId);
                     userDoc.set({
                         username: this.myForm.value.username,
                         email: this.myForm.value.email
                     });
-                    console.log('userDoc for signup', userDoc);
+                    // console.log('userDoc for signup', userDoc)
                     this.router.navigate(['dashboard']);
                     this.loading.dismiss();
                 }), ((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -188,7 +188,7 @@ SignupPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".brd {\n  border-bottom: outset;\n  margin-bottom: 0px;\n  margin-top: 0px;\n}\n\n.brd1 {\n  border-bottom: outset;\n  margin-bottom: 0px;\n  margin-top: 0px;\n}\n\n.gh {\n  position: relative;\n  top: 28px;\n}\n\n.brd2 {\n  border: dashed #eae8e8;\n  margin-bottom: 0px;\n  margin-top: 0px;\n}\n\n.col {\n  color: #eae8e8;\n}\n\n.tyu {\n  position: relative;\n  top: 20px;\n}\n\n.btn {\n  --background: #BB6BD9;\n  height: 51px;\n  /* border-radius: 84px; */\n  --border-radius: 4px;\n}\n\n.pos-set {\n  position: relative;\n  top: 25px;\n}\n\n.inng {\n  height: 85px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxzaWdudXAucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBSUUscUJBQXFCO0VBQ3JCLGtCQUFrQjtFQUNsQixlQUFlO0FBRmpCOztBQUlBO0VBSUUscUJBQXFCO0VBQ3JCLGtCQUFrQjtFQUNsQixlQUFlO0FBSmpCOztBQU1BO0VBQ0Usa0JBQWtCO0VBQ2xCLFNBQVM7QUFIWDs7QUFLQTtFQUNFLHNCQUFzQjtFQUN0QixrQkFBa0I7RUFDbEIsZUFBZTtBQUZqQjs7QUFJQTtFQUNFLGNBQWM7QUFEaEI7O0FBR0E7RUFDRSxrQkFBa0I7RUFDaEIsU0FBUztBQUFiOztBQUVBO0VBQ0UscUJBQWE7RUFDYixZQUFZO0VBQ1oseUJBQUE7RUFDQSxvQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsU0FBUztBQUNYOztBQUVBO0VBQ0UsWUFBWTtBQUNkIiwiZmlsZSI6InNpZ251cC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYnJke1xyXG4gIC8vIGJvcmRlcjogc29saWQgI2VhZThlODtcclxuICAvLyBtYXJnaW4tdG9wOiAwcHg7XHJcbiAgLy8gbWFyZ2luLWJvdHRvbTogLTNweDtcclxuICBib3JkZXItYm90dG9tOiBvdXRzZXQ7XHJcbiAgbWFyZ2luLWJvdHRvbTogMHB4O1xyXG4gIG1hcmdpbi10b3A6IDBweDtcclxufVxyXG4uYnJkMXtcclxuICAvLyBib3JkZXI6IHNvbGlkICNlYWU4ZTg7XHJcbiAgLy8gbWFyZ2luLWJvdHRvbTogLTNweDtcclxuICAvLyBtYXJnaW4tdG9wOiAwcHg7XHJcbiAgYm9yZGVyLWJvdHRvbTogb3V0c2V0O1xyXG4gIG1hcmdpbi1ib3R0b206IDBweDtcclxuICBtYXJnaW4tdG9wOiAwcHg7XHJcbn1cclxuLmdoe1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICB0b3A6IDI4cHg7XHJcbn1cclxuLmJyZDJ7XHJcbiAgYm9yZGVyOiBkYXNoZWQgI2VhZThlODtcclxuICBtYXJnaW4tYm90dG9tOiAwcHg7XHJcbiAgbWFyZ2luLXRvcDogMHB4O1xyXG59XHJcbi5jb2x7XHJcbiAgY29sb3I6ICNlYWU4ZTg7XHJcbn1cclxuLnR5dXtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICB0b3A6IDIwcHg7XHJcbn1cclxuLmJ0bntcclxuICAtLWJhY2tncm91bmQ6ICNCQjZCRDk7XHJcbiAgaGVpZ2h0OiA1MXB4O1xyXG4gIC8qIGJvcmRlci1yYWRpdXM6IDg0cHg7ICovXHJcbiAgLS1ib3JkZXItcmFkaXVzOiA0cHg7XHJcbn1cclxuXHJcbi5wb3Mtc2V0e1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICB0b3A6IDI1cHg7XHJcbn1cclxuXHJcbi5pbm5nIHtcclxuICBoZWlnaHQ6IDg1cHg7XHJcbn1cclxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".brd {\n  border-bottom: outset;\n  margin-bottom: 0px;\n  margin-top: 0px;\n}\n\n.brd1 {\n  border-bottom: outset;\n  margin-bottom: 0px;\n  margin-top: 0px;\n}\n\n.gh {\n  position: relative;\n  top: 28px;\n}\n\n.brd2 {\n  border: dashed #eae8e8;\n  margin-bottom: 0px;\n  margin-top: 0px;\n}\n\n.col {\n  color: #eae8e8;\n}\n\n.tyu {\n  position: relative;\n  top: 20px;\n}\n\n.btn {\n  --background: #BB6BD9;\n  height: 51px;\n  /* border-radius: 84px; */\n  --border-radius: 4px;\n}\n\n.pos-set {\n  position: relative;\n  top: 25px;\n}\n\n.inng {\n  height: 85px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxzaWdudXAucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBSUUscUJBQUE7RUFDQSxrQkFBQTtFQUNBLGVBQUE7QUFGRjs7QUFJQTtFQUlFLHFCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0FBSkY7O0FBTUE7RUFDRSxrQkFBQTtFQUNBLFNBQUE7QUFIRjs7QUFLQTtFQUNFLHNCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0FBRkY7O0FBSUE7RUFDRSxjQUFBO0FBREY7O0FBR0E7RUFDRSxrQkFBQTtFQUNFLFNBQUE7QUFBSjs7QUFFQTtFQUNFLHFCQUFBO0VBQ0EsWUFBQTtFQUNBLHlCQUFBO0VBQ0Esb0JBQUE7QUFDRjs7QUFFQTtFQUNFLGtCQUFBO0VBQ0EsU0FBQTtBQUNGOztBQUVBO0VBQ0UsWUFBQTtBQUNGIiwiZmlsZSI6InNpZ251cC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYnJke1xyXG4gIC8vIGJvcmRlcjogc29saWQgI2VhZThlODtcclxuICAvLyBtYXJnaW4tdG9wOiAwcHg7XHJcbiAgLy8gbWFyZ2luLWJvdHRvbTogLTNweDtcclxuICBib3JkZXItYm90dG9tOiBvdXRzZXQ7XHJcbiAgbWFyZ2luLWJvdHRvbTogMHB4O1xyXG4gIG1hcmdpbi10b3A6IDBweDtcclxufVxyXG4uYnJkMXtcclxuICAvLyBib3JkZXI6IHNvbGlkICNlYWU4ZTg7XHJcbiAgLy8gbWFyZ2luLWJvdHRvbTogLTNweDtcclxuICAvLyBtYXJnaW4tdG9wOiAwcHg7XHJcbiAgYm9yZGVyLWJvdHRvbTogb3V0c2V0O1xyXG4gIG1hcmdpbi1ib3R0b206IDBweDtcclxuICBtYXJnaW4tdG9wOiAwcHg7XHJcbn1cclxuLmdoe1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICB0b3A6IDI4cHg7XHJcbn1cclxuLmJyZDJ7XHJcbiAgYm9yZGVyOiBkYXNoZWQgI2VhZThlODtcclxuICBtYXJnaW4tYm90dG9tOiAwcHg7XHJcbiAgbWFyZ2luLXRvcDogMHB4O1xyXG59XHJcbi5jb2x7XHJcbiAgY29sb3I6ICNlYWU4ZTg7XHJcbn1cclxuLnR5dXtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICB0b3A6IDIwcHg7XHJcbn1cclxuLmJ0bntcclxuICAtLWJhY2tncm91bmQ6ICNCQjZCRDk7XHJcbiAgaGVpZ2h0OiA1MXB4O1xyXG4gIC8qIGJvcmRlci1yYWRpdXM6IDg0cHg7ICovXHJcbiAgLS1ib3JkZXItcmFkaXVzOiA0cHg7XHJcbn1cclxuXHJcbi5wb3Mtc2V0e1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICB0b3A6IDI1cHg7XHJcbn1cclxuXHJcbi5pbm5nIHtcclxuICBoZWlnaHQ6IDg1cHg7XHJcbn1cclxuIl19 */");
 
 /***/ }),
 

@@ -46,7 +46,7 @@ let SupportCirclePage = class SupportCirclePage {
         this.persons = [];
         let currentUser = localStorage.getItem('LoginData');
         this.currentUser = JSON.parse(currentUser);
-        console.log("CurentUser", this.currentUser);
+        // console.log("CurentUser",this.currentUser);
         this.userid = this.currentUser.user.uid;
     }
     ngOnInit() {
@@ -58,10 +58,10 @@ let SupportCirclePage = class SupportCirclePage {
     loadPerson() {
         this.http.getPersons().subscribe((res) => {
             // console.log(res);
-            console.log(res);
+            // console.log(res);
             this.persons = res;
         }, error => {
-            console.log(error);
+            // console.log(error);
         });
     }
     addPerson() {
@@ -76,7 +76,7 @@ let SupportCirclePage = class SupportCirclePage {
         }
     }
     edititem(item) {
-        console.log(item);
+        // console.log(item)
         let navigationExtras = {
             state: {
                 item
@@ -152,7 +152,7 @@ SupportCirclePageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__de
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".h111 {\n  font-weight: bold;\n}\n\n.se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 16px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n  padding-bottom: 10px;\n}\n\n.lab1 {\n  padding-bottom: 10px;\n  color: #ccc;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.list1 {\n  padding-top: 65px;\n}\n\nhr {\n  border-bottom: 1px solid #ccc;\n  margin: 10px 0;\n  width: 100%;\n}\n\n.cs1 {\n  color: #ccc;\n}\n\n.btn1 {\n  --border-radius: 4px;\n  margin-top: 45px;\n  height: 50px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxzdXBwb3J0LWNpcmNsZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBaUI7QUFDbkI7O0FBQ0E7RUFDRSxrQkFBa0I7RUFDbEIsZUFBZTtBQUVqQjs7QUFDQTtFQUNFLHFCQUFxQjtBQUV2Qjs7QUFFQTtFQUNFLFlBQVk7RUFDWixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsZUFBZTtFQUNiLG9CQUFvQjtBQUN4Qjs7QUFDQTtFQUNFLG9CQUFvQjtFQUNwQixXQUFXO0FBRWI7O0FBQUE7RUFDRSxpQkFBaUI7RUFDakIsZUFBZTtBQUdqQjs7QUFEQTtFQUNFLGlCQUFpQjtBQUluQjs7QUFGQTtFQUNFLDZCQUE2QjtFQUM3QixjQUFjO0VBQ2QsV0FBVztBQUtiOztBQUhBO0VBQ0UsV0FBVztBQU1iOztBQUpBO0VBQ0Usb0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixZQUFZO0FBT2QiLCJmaWxlIjoic3VwcG9ydC1jaXJjbGUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmgxMTEge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5zZSB7XHJcbiAgcGFkZGluZy1yaWdodDogNXB4O1xyXG4gIGZvbnQtc2l6ZTogMjVweDtcclxufVxyXG5cclxuLmJyZHtcclxuICBib3JkZXI6IHNvbGlkICNlYWU4ZTg7XHJcblxyXG59XHJcblxyXG4uYXZhIHtcclxuICBoZWlnaHQ6IDY1cHg7XHJcbiAgd2lkdGg6IDY1cHg7XHJcbn1cclxuXHJcbi5wMSB7XHJcbiAgZm9udC1zaXplOiAxNnB4O1xyXG4gIHBhZGRpbmctdG9wOiA0cHg7XHJcbn1cclxuXHJcbi5oMjIge1xyXG4gIGZvbnQtc2l6ZTogMThweDtcclxuICAgIHBhZGRpbmctYm90dG9tOiAxMHB4O1xyXG59XHJcbi5sYWIxIHtcclxuICBwYWRkaW5nLWJvdHRvbTogMTBweDtcclxuICBjb2xvcjogI2NjYztcclxufVxyXG4ubGFiZWwxIHtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICBmb250LXNpemU6IDIwcHg7XHJcbn1cclxuLmxpc3QxIHtcclxuICBwYWRkaW5nLXRvcDogNjVweDtcclxufVxyXG5ociB7XHJcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNjY2M7XHJcbiAgbWFyZ2luOiAxMHB4IDA7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbn1cclxuLmNzMSB7XHJcbiAgY29sb3I6ICNjY2M7XHJcbn1cclxuLmJ0bjEge1xyXG4gIC0tYm9yZGVyLXJhZGl1czogNHB4O1xyXG4gIG1hcmdpbi10b3A6IDQ1cHg7XHJcbiAgaGVpZ2h0OiA1MHB4O1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".h111 {\n  font-weight: bold;\n}\n\n.se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 16px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n  padding-bottom: 10px;\n}\n\n.lab1 {\n  padding-bottom: 10px;\n  color: #ccc;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.list1 {\n  padding-top: 65px;\n}\n\nhr {\n  border-bottom: 1px solid #ccc;\n  margin: 10px 0;\n  width: 100%;\n}\n\n.cs1 {\n  color: #ccc;\n}\n\n.btn1 {\n  --border-radius: 4px;\n  margin-top: 45px;\n  height: 50px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxzdXBwb3J0LWNpcmNsZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBQTtBQUNGOztBQUNBO0VBQ0Usa0JBQUE7RUFDQSxlQUFBO0FBRUY7O0FBQ0E7RUFDRSxxQkFBQTtBQUVGOztBQUVBO0VBQ0UsWUFBQTtFQUNBLFdBQUE7QUFDRjs7QUFFQTtFQUNFLGVBQUE7RUFDQSxnQkFBQTtBQUNGOztBQUVBO0VBQ0UsZUFBQTtFQUNFLG9CQUFBO0FBQ0o7O0FBQ0E7RUFDRSxvQkFBQTtFQUNBLFdBQUE7QUFFRjs7QUFBQTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtBQUdGOztBQURBO0VBQ0UsaUJBQUE7QUFJRjs7QUFGQTtFQUNFLDZCQUFBO0VBQ0EsY0FBQTtFQUNBLFdBQUE7QUFLRjs7QUFIQTtFQUNFLFdBQUE7QUFNRjs7QUFKQTtFQUNFLG9CQUFBO0VBQ0EsZ0JBQUE7RUFDQSxZQUFBO0FBT0YiLCJmaWxlIjoic3VwcG9ydC1jaXJjbGUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmgxMTEge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5zZSB7XHJcbiAgcGFkZGluZy1yaWdodDogNXB4O1xyXG4gIGZvbnQtc2l6ZTogMjVweDtcclxufVxyXG5cclxuLmJyZHtcclxuICBib3JkZXI6IHNvbGlkICNlYWU4ZTg7XHJcblxyXG59XHJcblxyXG4uYXZhIHtcclxuICBoZWlnaHQ6IDY1cHg7XHJcbiAgd2lkdGg6IDY1cHg7XHJcbn1cclxuXHJcbi5wMSB7XHJcbiAgZm9udC1zaXplOiAxNnB4O1xyXG4gIHBhZGRpbmctdG9wOiA0cHg7XHJcbn1cclxuXHJcbi5oMjIge1xyXG4gIGZvbnQtc2l6ZTogMThweDtcclxuICAgIHBhZGRpbmctYm90dG9tOiAxMHB4O1xyXG59XHJcbi5sYWIxIHtcclxuICBwYWRkaW5nLWJvdHRvbTogMTBweDtcclxuICBjb2xvcjogI2NjYztcclxufVxyXG4ubGFiZWwxIHtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICBmb250LXNpemU6IDIwcHg7XHJcbn1cclxuLmxpc3QxIHtcclxuICBwYWRkaW5nLXRvcDogNjVweDtcclxufVxyXG5ociB7XHJcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNjY2M7XHJcbiAgbWFyZ2luOiAxMHB4IDA7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbn1cclxuLmNzMSB7XHJcbiAgY29sb3I6ICNjY2M7XHJcbn1cclxuLmJ0bjEge1xyXG4gIC0tYm9yZGVyLXJhZGl1czogNHB4O1xyXG4gIG1hcmdpbi10b3A6IDQ1cHg7XHJcbiAgaGVpZ2h0OiA1MHB4O1xyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 

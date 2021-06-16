@@ -60,8 +60,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _saved_activities_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./saved-activities.page.scss */ "q6Rk");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
-/* harmony import */ var src_app_services_http_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/http.service */ "N+K7");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ "I/3d");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_http_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/http.service */ "N+K7");
+
 
 
 
@@ -70,53 +72,78 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SavedActivitiesPage = class SavedActivitiesPage {
-    constructor(postsService, http, navCtrl) {
+    constructor(postsService, navctrl, afStore, http, navCtrl) {
         this.postsService = postsService;
+        this.navctrl = navctrl;
+        this.afStore = afStore;
         this.http = http;
         this.navCtrl = navCtrl;
         this.postsexpolore = [];
         this.posts = [];
         this.postsactivity = [];
-        this.ngOnInit();
-        this.ionViewWillEnter();
+        this.teamrecords = [];
+        this.explorerecords = [];
+        this.posts;
+        this.postsexpolore;
+        let currentUser = localStorage.getItem('LoginData');
+        this.currentUser = JSON.parse(currentUser);
+        // console.log("CurentUser",this.currentUser);
+        this.userid = this.currentUser.user.uid;
     }
     ngOnInit() {
-        this.postsService.getTeams().subscribe((posts) => {
-            this.posts = posts;
-            console.log(this.posts);
-        });
-        this.postsService.getActivities().subscribe((posts) => {
-            this.postsexpolore = posts;
-        });
     }
     ionViewWillEnter() {
-        this.ngOnInit();
-    }
-    crazyEvent(val, value) {
-        console.log("vslueOfToggle", val.detail.checked);
-        console.log("vslueOfObj", value);
-        let records;
-        let obj = {
-            records: [
-                {
-                    id: value.id,
-                    fields: {
-                        Save: val.detail.checked
-                    }
-                }
-            ]
-        };
-        console.log("records", obj);
-        this.postapiaittable(obj);
+        this.explorerecords = [];
+        this.afStore
+            .collection('Explore_activities_saved/' + this.userid + '/activity', (ref) => ref.where('uid', '==', this.userid))
+            .get()
+            .subscribe((ss) => {
+            let message;
+            let single;
+            if (ss.docs.length === 0) {
+                message = 'Document not found! Try again!';
+                this.exploreobject = null;
+                // console.log('message', message);
+            }
+            else {
+                ss.docs.forEach((doc) => {
+                    message = '';
+                    this.exploreobject = doc.data();
+                    this.explorerecords.push(this.exploreobject);
+                });
+                // console.log('explorerecords', this.explorerecords);
+            }
+        });
+        this.teamrecords = [];
+        this.afStore
+            .collection('Team_activities_saved/' + this.userid + '/activity', (ref) => ref.where('uid', '==', this.userid))
+            .get()
+            .subscribe((ss) => {
+            let message;
+            let single;
+            if (ss.docs.length === 0) {
+                message = 'Document not found! Try again!';
+                this.teamobject = null;
+                // console.log('message', message);
+            }
+            else {
+                ss.docs.forEach((doc) => {
+                    message = '';
+                    this.teamobject = doc.data();
+                    this.teamrecords.push(this.teamobject);
+                });
+                // console.log('teamrecords', this.teamrecords);
+            }
+        });
     }
     postapiaittable(toggleValue) {
         let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]();
         headers = this.createAuthorizationHeader(headers);
         const body = toggleValue;
-        console.log('body', body);
+        // console.log('body',body)
         this.http.put('https://api.airtable.com/v0/appUBxaqmwbWUP9Rx/All%20Team%20Activities', body, { headers }).subscribe(data => {
             this.postId = data;
-            console.log('this.postAPI', this.postId);
+            // console.log('this.postAPI', this.postId)
             this.ngOnInit();
         });
     }
@@ -127,8 +154,8 @@ let SavedActivitiesPage = class SavedActivitiesPage {
         return headers;
     }
     crazyEvent1(val, value) {
-        console.log("vslueOfToggle", val.detail.checked);
-        console.log("vslueOfObj", value);
+        // console.log("vslueOfToggle",val.detail.checked)
+        // console.log("vslueOfObj",value);
         let records;
         let obj = {
             records: [
@@ -140,17 +167,17 @@ let SavedActivitiesPage = class SavedActivitiesPage {
                 }
             ]
         };
-        console.log("records", obj);
+        // console.log("records",obj)
         this.postapiaittable1(obj);
     }
     postapiaittable1(toggleValue) {
         let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]();
         headers = this.createAuthorizationHeader(headers);
         const body = toggleValue;
-        console.log('body', body);
+        // console.log('body',body)
         this.http.put('https://api.airtable.com/v0/appB26stg0dkRk7Zb/All%20Individual%20Activities', body, { headers }).subscribe(data => {
             this.postId = data;
-            console.log('this.postAPI', this.postId);
+            // console.log('this.postAPI', this.postId)
         });
     }
     createAuthorizationHeader1(headers) {
@@ -160,6 +187,7 @@ let SavedActivitiesPage = class SavedActivitiesPage {
         return headers;
     }
     savedetailsexp(item) {
+        // console.log('mmmmmmm', item)
         let navigationExtras = {
             state: {
                 item
@@ -175,11 +203,16 @@ let SavedActivitiesPage = class SavedActivitiesPage {
         };
         this.navCtrl.navigateForward('save-details', navigationExtras);
     }
+    backbtn() {
+        this.navctrl.navigateBack('dashboard');
+    }
 };
 SavedActivitiesPage.ctorParameters = () => [
-    { type: src_app_services_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"] },
+    { type: src_app_services_http_service__WEBPACK_IMPORTED_MODULE_7__["HttpService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] }
 ];
 SavedActivitiesPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
@@ -202,7 +235,7 @@ SavedActivitiesPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar mode=\"ios\">\r\n    <ion-buttons slot=\"start\" mode=\"md\">\r\n      <ion-back-button defaultHref=\"dashboard\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title *ngIf=\"!search\">Saved Activities</ion-title>\r\n    <!-- <ion-buttons slot=\"end\">\r\n      <ion-icon name=\"search\" class=\"se\" (click)=\"search1()\"></ion-icon>\r\n    </ion-buttons> -->\r\n    <!-- <ion-searchbar [(ngModel)]=\"filterTerm \" class=\"sear1\" *ngIf=\"search == true\" type=\"text\" color=\"light\" placeholder=\"Search text\" clearInput>\r\n    </ion-searchbar> -->\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n<div class=\"ion-text-center ion-padding-top\">\r\n  <img src=\"assets/img/3.png\">\r\n</div>\r\n\r\n<!-- <ion-item class=\"brd ion-margin\" lines=\"none\">\r\n  <ion-label class=\"label1\">Filter</ion-label>\r\n  <ion-select [(ngModel)]=\"selectedvalue\" (ionChange)=\"OnChange($event)\">\r\n    <ion-select-option *ngFor=\"let post of postfil\">{{post}}</ion-select-option>\r\n  </ion-select>\r\n</ion-item> -->\r\n\r\n<div *ngFor=\"let item of posts | filter:filterTerm\">\r\n  <ion-list *ngIf=\"item.fields.Save === true\" class=\"ion-padding-top\">\r\n  <!-- <ion-list class=\"ion-padding-top\"> -->\r\n    <ion-item (click)=\"savedetailsteam(item)\">\r\n    <ion-avatar slot=\"start\" class=\"ava\" *ngFor=\"let postimg of item.fields.FeaturedPhoto\">\r\n      <img [src]=\"postimg.url\">\r\n    </ion-avatar>\r\n      <ion-label>\r\n        <h2 class=\"h22\">{{item.fields.Name}}</h2>\r\n        <p class=\"p1\"> {{item.fields.ActivityCategory}}</p>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n  </div>\r\n\r\n  <div *ngFor=\"let item of postsexpolore | filter:filterTerm\">\r\n    <ion-list *ngIf=\"item.fields.Save === true\" class=\"ion-padding-top\">\r\n    <!-- <ion-list class=\"ion-padding-top\"> -->\r\n      <ion-item (click)=\"savedetailsexp(item)\">\r\n      <ion-avatar slot=\"start\" class=\"ava\" *ngFor=\"let postimg of item.fields.Featuredphoto\">\r\n        <img [src]=\"postimg.url\">\r\n      </ion-avatar>\r\n        <ion-label>\r\n          <h2 class=\"h22\">{{item.fields.Name}}</h2>\r\n          <p class=\"p1\">{{item.fields.TypeOfActivity}}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n    </ion-list>\r\n    </div>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar mode=\"ios\">\r\n    <ion-buttons slot=\"start\" mode=\"md\">\r\n      <ion-back-button defaultHref=\"dashboard\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title *ngIf=\"!search\">Saved Activities</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n<div class=\"ion-text-center ion-padding-top\">\r\n  <img src=\"assets/img/3.png\">\r\n</div>\r\n\r\n <div *ngFor=\"let item of teamrecords\">\r\n    <ion-item (click)=\"savedetailsteam(item)\">\r\n    <ion-avatar slot=\"start\" class=\"ava\">\r\n      <img [src]=\"item.url\">\r\n    </ion-avatar>\r\n      <ion-label>\r\n        <h2 class=\"h22\">{{item.Name}}</h2>\r\n        <p class=\"p1\"> {{item.ActivityCategory}}</p>\r\n      </ion-label>\r\n    </ion-item>\r\n  </div> \r\n\r\n<!-- <div *ngFor=\"let item of posts | filter:filterTerm\">\r\n  <ion-list *ngIf=\"item.fields.Save === true\" class=\"ion-padding-top\">\r\n    <ion-item (click)=\"savedetailsteam(item)\">\r\n    <ion-avatar slot=\"start\" class=\"ava\" *ngFor=\"let postimg of item.fields.FeaturedPhoto\">\r\n      <img [src]=\"postimg.url\">\r\n    </ion-avatar>\r\n      <ion-label>\r\n        <h2 class=\"h22\">{{item.fields.Name}}</h2>\r\n        <p class=\"p1\"> {{item.fields.ActivityCategory}}</p>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n  </div>\r\n\r\n  <div *ngFor=\"let item of postsexpolore | filter:filterTerm\">\r\n    <ion-list *ngIf=\"item.fields.Save === true\" class=\"ion-padding-top\">\r\n      <ion-item (click)=\"savedetailsexp(item)\">\r\n      <ion-avatar slot=\"start\" class=\"ava\" *ngFor=\"let postimg of item.fields.Featuredphoto\">\r\n        <img [src]=\"postimg.url\">\r\n      </ion-avatar>\r\n        <ion-label>\r\n          <h2 class=\"h22\">{{item.fields.Name}}</h2>\r\n          <p class=\"p1\">{{item.fields.TypeOfActivity}}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n    </ion-list>\r\n    </div> -->\r\n\r\n    <div class=\"align-items-center\" *ngFor=\"let record of explorerecords;\">\r\n          <ion-item (click)=\"savedetailsexp(record)\">\r\n          \r\n          <ion-avatar slot=\"start\" class=\"ava\">\r\n            <img [src]=\"record.url\">\r\n          </ion-avatar>\r\n            <ion-label>\r\n              <h2 class=\"h22\">{{record.Name}}</h2>\r\n              <p class=\"p1\">{{record.TypeOfActivity}}</p>\r\n            </ion-label>\r\n          </ion-item>\r\n      </div>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -252,7 +285,7 @@ SavedActivitiesPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 15px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.sear1 {\n  padding-top: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxzYXZlZC1hY3Rpdml0aWVzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixlQUFlO0FBQ2pCOztBQUNBO0VBQ0UscUJBQXFCO0FBRXZCOztBQUNBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7QUFFYjs7QUFDQTtFQUNFLGVBQWU7RUFDZixnQkFBZ0I7QUFFbEI7O0FBQ0E7RUFDRSxlQUFlO0FBRWpCOztBQUFBO0VBQ0UsaUJBQWlCO0VBQ2pCLGVBQWU7QUFHakI7O0FBREE7RUFDRSxpQkFBaUI7QUFJbkIiLCJmaWxlIjoic2F2ZWQtYWN0aXZpdGllcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2Uge1xyXG4gIHBhZGRpbmctcmlnaHQ6IDVweDtcclxuICBmb250LXNpemU6IDI1cHg7XHJcbn1cclxuLmJyZHtcclxuICBib3JkZXI6IHNvbGlkICNlYWU4ZTg7XHJcblxyXG59XHJcbi5hdmEge1xyXG4gIGhlaWdodDogNjVweDtcclxuICB3aWR0aDogNjVweDtcclxufVxyXG5cclxuLnAxIHtcclxuICBmb250LXNpemU6IDE1cHg7XHJcbiAgcGFkZGluZy10b3A6IDRweDtcclxufVxyXG5cclxuLmgyMiB7XHJcbiAgZm9udC1zaXplOiAxOHB4O1xyXG59XHJcbi5sYWJlbDEge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIGZvbnQtc2l6ZTogMjBweDtcclxufVxyXG4uc2VhcjEge1xyXG4gIHBhZGRpbmctdG9wOiAxMHB4O1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".se {\n  padding-right: 5px;\n  font-size: 25px;\n}\n\n.brd {\n  border: solid #eae8e8;\n}\n\n.ava {\n  height: 65px;\n  width: 65px;\n}\n\n.p1 {\n  font-size: 15px;\n  padding-top: 4px;\n}\n\n.h22 {\n  font-size: 18px;\n}\n\n.label1 {\n  font-weight: bold;\n  font-size: 20px;\n}\n\n.sear1 {\n  padding-top: 10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxzYXZlZC1hY3Rpdml0aWVzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsZUFBQTtBQUNGOztBQUNBO0VBQ0UscUJBQUE7QUFFRjs7QUFDQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0FBRUY7O0FBQ0E7RUFDRSxlQUFBO0VBQ0EsZ0JBQUE7QUFFRjs7QUFDQTtFQUNFLGVBQUE7QUFFRjs7QUFBQTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtBQUdGOztBQURBO0VBQ0UsaUJBQUE7QUFJRiIsImZpbGUiOiJzYXZlZC1hY3Rpdml0aWVzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zZSB7XHJcbiAgcGFkZGluZy1yaWdodDogNXB4O1xyXG4gIGZvbnQtc2l6ZTogMjVweDtcclxufVxyXG4uYnJke1xyXG4gIGJvcmRlcjogc29saWQgI2VhZThlODtcclxuXHJcbn1cclxuLmF2YSB7XHJcbiAgaGVpZ2h0OiA2NXB4O1xyXG4gIHdpZHRoOiA2NXB4O1xyXG59XHJcblxyXG4ucDEge1xyXG4gIGZvbnQtc2l6ZTogMTVweDtcclxuICBwYWRkaW5nLXRvcDogNHB4O1xyXG59XHJcblxyXG4uaDIyIHtcclxuICBmb250LXNpemU6IDE4cHg7XHJcbn1cclxuLmxhYmVsMSB7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG59XHJcbi5zZWFyMSB7XHJcbiAgcGFkZGluZy10b3A6IDEwcHg7XHJcbn1cclxuIl19 */");
 
 /***/ })
 

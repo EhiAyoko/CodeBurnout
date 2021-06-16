@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons mode="md" slot="start"  (click)="backbtn()">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size: 10px;">{{brandsdetails.Name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin">
+    <div class="ion-text-center"> 
+      <video width="320" height="240" controls>
+        <source [src]="brandsdetails.url">
+      </video>
+    </div>
+    <div>
+      <img [src]="brandsdetails.url">
+    </div>
+    <div class="ion-margin">
+      <ion-text class="">
+        {{brandsdetails.Notes}}
+      </ion-text>
+    </div>
+    <ion-item class="brd" lines="none">
+      <ion-label>Save Activity</ion-label>
+      <ion-toggle mode="ios" checked="{{brandsdetails.Save === true ? true : false}}" (ionChange)="firebaseEvent($event,brandsdetails,postimg)" color="warning"></ion-toggle>
+    </ion-item>
+  <!-- </div> -->
+</div>
+</ion-content>

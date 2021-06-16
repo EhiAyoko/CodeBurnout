@@ -181,8 +181,8 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\Mobile Application\fiverr\code burnout-latest\code-burnout-new\src\polyfills.ts */"hN/g");
-module.exports = __webpack_require__(/*! G:\Mobile Application\fiverr\code burnout-latest\code-burnout-new\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */"rZy+");
+__webpack_require__(/*! G:\Mobile Application\fiverr\code burnout-latest\code-burnout-new-2021\code-burnout-new-2021\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! G:\Mobile Application\fiverr\code burnout-latest\code-burnout-new-2021\code-burnout-new-2021\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */"rZy+");
 
 
 /***/ }),
