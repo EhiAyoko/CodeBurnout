@@ -21,6 +21,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/firestore */ "I/3d");
 /* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "/XPu");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _ionic_native_unique_device_id_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/unique-device-id/ngx */ "/+Rg");
+
 
 
 
@@ -33,9 +35,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TeamDetailsPage = class TeamDetailsPage {
-    constructor(router, http, afStore, socialSharing, formBuilder, authpostservice, actionSheetController) {
+    constructor(router, navCtrl, uniqueDeviceID, http, alertController, afStore, socialSharing, formBuilder, authpostservice, actionSheetController) {
         this.router = router;
+        this.navCtrl = navCtrl;
+        this.uniqueDeviceID = uniqueDeviceID;
         this.http = http;
+        this.alertController = alertController;
         this.afStore = afStore;
         this.socialSharing = socialSharing;
         this.formBuilder = formBuilder;
@@ -43,18 +48,20 @@ let TeamDetailsPage = class TeamDetailsPage {
         this.actionSheetController = actionSheetController;
         this.brandsdetails = '';
         this.togglesavevalue = '';
-        this.brandsdetails;
-        let currentUser = localStorage.getItem('LoginData');
-        this.currentUser = JSON.parse(currentUser);
-        // console.log("CurentUser", this.currentUser);
-        this.userid = this.currentUser.user.uid;
-    }
-    ngOnInit() {
+        if (localStorage.getItem('LoginData')) {
+            let currentUser = localStorage.getItem('LoginData');
+            this.currentUser = JSON.parse(currentUser);
+            console.log("CurentUser", this.currentUser);
+            this.userid = this.currentUser.user.uid;
+            console.log("this.userid", this.userid);
+        }
+        else {
+            this.loadCall();
+        }
         const navigation = this.router.getCurrentNavigation();
         const state = navigation.extras.state;
         if (state != undefined) {
             this.brandsdetails = state.item;
-            // console.log(this.brandsdetails);
             this.authpostservice.getActivity(this.userid, this.brandsdetails.id)
                 .then(doc => {
                 // console.log('doc', doc)
@@ -69,6 +76,33 @@ let TeamDetailsPage = class TeamDetailsPage {
             });
         }
     }
+    loadCall() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Alert',
+                message: 'If you want to use <strong>Save Activity</strong>, you need to login',
+                backdropDismiss: false,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: () => {
+                            this.router.navigateByUrl('/team-activities');
+                        }
+                    }, {
+                        text: 'Login',
+                        handler: () => {
+                            // this.router.navigateByUrl('/login');
+                            this.navCtrl.navigateForward('login');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    ngOnInit() { }
     sShare(brandsdetails, postimg) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             // console.log('brandsdetails', brandsdetails)
@@ -79,14 +113,11 @@ let TeamDetailsPage = class TeamDetailsPage {
                 chooserTitle: 'code burnout',
             };
             yield this.socialSharing.shareWithOptions(options);
-            // await  this.socialSharing.share('this is msg', 'subject', 'url').then().catch();
         });
     }
     // working for save activity
     crazyEvent(val, value, postimg) {
         this.brandsdetails;
-        // console.log("vslueOfToggle", val.detail.checked)
-        // console.log("vslueOfObj", value);
         let records;
         let obj = {
             records: [
@@ -128,30 +159,27 @@ let TeamDetailsPage = class TeamDetailsPage {
         return headers;
     }
     ionViewWillEnter() {
-        this.brandsdetails;
-        this.addrecord = { type: '', description: '', amount: null };
-        this.afStore.collection('/Team_activities_saved/').snapshotChanges().subscribe(res => {
-            // console.log('res', res)
-            if (res) {
-                this.records = res.map(e => {
-                    return {
-                        id: e.payload.doc.id,
-                        Name: e.payload.doc.data()['Name'],
-                        TypeOfActivity: e.payload.doc.data()['TypeOfActivity'],
-                        url: e.payload.doc.data()['url']
-                    };
-                });
-            }
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.brandsdetails;
+            this.addrecord = { type: '', description: '', amount: null };
+            this.afStore.collection('/Team_activities_saved/').snapshotChanges().subscribe(res => {
+                if (res) {
+                    this.records = res.map(e => {
+                        return {
+                            id: e.payload.doc.id,
+                            Name: e.payload.doc.data()['Name'],
+                            TypeOfActivity: e.payload.doc.data()['TypeOfActivity'],
+                            url: e.payload.doc.data()['url']
+                        };
+                    });
+                }
+            });
+            // console.log('this.records', this.records)
         });
-        // console.log('this.records', this.records)
     }
     firebaseEvent(val, value, postimg) {
-        //  console.log('fillter data', this.brandsdetails.fields.find(item => item.Video === 0).Video.url )
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
-        //   console.log("this.brandsdetails.fields.Video[0].url", this.brandsdetails.fields.Video[0].url)
         this.brandsdetails;
-        // console.log("vslueOfToggle", val.detail.checked)
-        // console.log("vslueOfObj", value);
         if (val.detail.checked === true) {
             let addrecord = {};
             addrecord['id'] = (_a = this.brandsdetails) === null || _a === void 0 ? void 0 : _a.id;
@@ -178,13 +206,11 @@ let TeamDetailsPage = class TeamDetailsPage {
                 addrecord['Video'] = (_u = (_t = (_s = this.brandsdetails) === null || _s === void 0 ? void 0 : _s.fields) === null || _t === void 0 ? void 0 : _t.Video[0]) === null || _u === void 0 ? void 0 : _u.url;
                 // console.log('video', this.brandsdetails?.fields?.Video[0]?.url)
             }
-            // console.log(addrecord)
             this.afStore
                 .collection('Team_activities_saved/' + this.userid + '/activity')
                 .doc(this.brandsdetails.id)
                 .set(addrecord).then(() => {
                 this.addrecord = { type: '', description: '', amount: null };
-                // this.afStore.collection('Records').doc().set({id: '' , name:'hamza'})
             });
         }
         else {
@@ -252,7 +278,10 @@ let TeamDetailsPage = class TeamDetailsPage {
 };
 TeamDetailsPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__["NavController"] },
+    { type: _ionic_native_unique_device_id_ngx__WEBPACK_IMPORTED_MODULE_11__["UniqueDeviceID"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__["AlertController"] },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__["AngularFirestore"] },
     { type: _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_9__["SocialSharing"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"] },

@@ -72,8 +72,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SavedActivitiesPage = class SavedActivitiesPage {
-    constructor(postsService, navctrl, afStore, http, navCtrl) {
+    constructor(postsService, alertController, navctrl, afStore, http, navCtrl) {
         this.postsService = postsService;
+        this.alertController = alertController;
         this.navctrl = navctrl;
         this.afStore = afStore;
         this.http = http;
@@ -85,13 +86,47 @@ let SavedActivitiesPage = class SavedActivitiesPage {
         this.explorerecords = [];
         this.posts;
         this.postsexpolore;
-        let currentUser = localStorage.getItem('LoginData');
-        this.currentUser = JSON.parse(currentUser);
-        // console.log("CurentUser",this.currentUser);
-        this.userid = this.currentUser.user.uid;
+        if (localStorage.getItem('LoginData')) {
+            let currentUser = localStorage.getItem('LoginData');
+            this.currentUser = JSON.parse(currentUser);
+            console.log("CurentUser", this.currentUser);
+            this.userid = this.currentUser.user.uid;
+            console.log("this.userid", this.userid);
+        }
+        else {
+            this.loadCall();
+        }
+        // let currentUser = localStorage.getItem('LoginData');
+        // this.currentUser = JSON.parse(currentUser);
+        // this.userid = this.currentUser.user.uid;
     }
-    ngOnInit() {
+    loadCall() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Alert',
+                message: 'If you want to use <strong>Save Activity</strong>, you need to login',
+                backdropDismiss: false,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: () => {
+                            this.navCtrl.navigateForward('dashboard');
+                        }
+                    }, {
+                        text: 'Login',
+                        handler: () => {
+                            // this.router.navigateByUrl('/login');
+                            this.navCtrl.navigateForward('login');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
     }
+    ngOnInit() { }
     ionViewWillEnter() {
         this.explorerecords = [];
         this.afStore
@@ -111,7 +146,6 @@ let SavedActivitiesPage = class SavedActivitiesPage {
                     this.exploreobject = doc.data();
                     this.explorerecords.push(this.exploreobject);
                 });
-                // console.log('explorerecords', this.explorerecords);
             }
         });
         this.teamrecords = [];
@@ -154,8 +188,6 @@ let SavedActivitiesPage = class SavedActivitiesPage {
         return headers;
     }
     crazyEvent1(val, value) {
-        // console.log("vslueOfToggle",val.detail.checked)
-        // console.log("vslueOfObj",value);
         let records;
         let obj = {
             records: [
@@ -209,6 +241,7 @@ let SavedActivitiesPage = class SavedActivitiesPage {
 };
 SavedActivitiesPage.ctorParameters = () => [
     { type: src_app_services_http_service__WEBPACK_IMPORTED_MODULE_7__["HttpService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },

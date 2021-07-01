@@ -57,18 +57,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dashboard_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboard.page.scss */ "ws6Y");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _ionic_native_unique_device_id_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/unique-device-id/ngx */ "/+Rg");
+
 
 
 
 
 
 let DashboardPage = class DashboardPage {
-    constructor(router) {
+    constructor(router, uniqueDeviceID) {
         this.router = router;
+        this.uniqueDeviceID = uniqueDeviceID;
     }
     ngOnInit() {
     }
     SavedActivitiespage() {
+        // this.uniqueDeviceID.get()
+        // .then((uuid: any) => {
+        //   console.log(uuid)
+        //   this.uuid = uuid
+        //   console.log(this.uuid)
+        // } 
+        //  )
+        // .catch((error: any) => console.log(error));
         this.router.navigate(['saved-activities']);
     }
     BrowseActivitiespage() {
@@ -83,7 +94,8 @@ let DashboardPage = class DashboardPage {
     }
 };
 DashboardPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _ionic_native_unique_device_id_ngx__WEBPACK_IMPORTED_MODULE_5__["UniqueDeviceID"] }
 ];
 DashboardPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -143,7 +155,7 @@ DashboardPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button menu=\"first\" color=\"dark\"></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Dashboard</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n<div class=\"ion-text-center ion-padding-top ion-padding-bottom\">\r\n  <img src=\"assets/img/Group of Black Millennials at Office 2 1.png\">\r\n</div>\r\n\r\n<ion-row>\r\n  <ion-col class=\"ion-padding-start  ion-text-center\" size=\"6\" (click)=\"SavedActivitiespage()\">\r\n    <img src=\"assets/img/Product Card.png\">\r\n  </ion-col>\r\n  <ion-col class=\"ion-padding-end ion-text-center\" size=\"6\" (click)=\"BrowseActivitiespage()\">\r\n    <img src=\"assets/img/Product Card1.png\">\r\n  </ion-col>\r\n  <ion-col class=\"ion-padding-start ion-text-center\" size=\"6\" (click)=\"teamactivities()\">\r\n    <img src=\"assets/img/Product Card2.png\">\r\n  </ion-col>\r\n  <ion-col class=\"ion-padding-end ion-text-center\" size=\"6\" (click)=\"blogpage()\">\r\n    <img src=\"assets/img/Product Card3.png\">\r\n  </ion-col>\r\n</ion-row>\r\n\r\n<div class=\"ion-text-center ion-padding-bottom\">\r\n  <img src=\"assets/img/CodeBurnout-Logo-PNG-01 1.png\">\r\n</div>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button menu=\"first\" color=\"dark\"></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Dashboard</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <!-- <div class=\"ion-text-center ion-padding-top ion-padding-bottom\">\r\n    {{uuid}}\r\n  </div> -->\r\n<div class=\"ion-text-center ion-padding-top ion-padding-bottom\">\r\n  <img src=\"assets/img/Group of Black Millennials at Office 2 1.png\">\r\n</div>\r\n\r\n<ion-row>\r\n  <ion-col class=\"ion-padding-start  ion-text-center\" size=\"6\" (click)=\"SavedActivitiespage()\">\r\n    <img src=\"assets/img/Product Card.png\">\r\n  </ion-col>\r\n  <ion-col class=\"ion-padding-end ion-text-center\" size=\"6\" (click)=\"BrowseActivitiespage()\">\r\n    <img src=\"assets/img/Product Card1.png\">\r\n  </ion-col>\r\n  <ion-col class=\"ion-padding-start ion-text-center\" size=\"6\" (click)=\"teamactivities()\">\r\n    <img src=\"assets/img/Product Card2.png\">\r\n  </ion-col>\r\n  <ion-col class=\"ion-padding-end ion-text-center\" size=\"6\" (click)=\"blogpage()\">\r\n    <img src=\"assets/img/Product Card3.png\">\r\n  </ion-col>\r\n</ion-row>\r\n\r\n<div class=\"ion-text-center ion-padding-bottom\">\r\n  <img src=\"assets/img/CodeBurnout-Logo-PNG-01 1.png\">\r\n</div>\r\n</ion-content>\r\n");
 
 /***/ }),
 

@@ -38,16 +38,49 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SupportCirclePage = class SupportCirclePage {
-    constructor(http, router, navCtrl) {
+    constructor(http, alertController, router, navCtrl) {
         this.http = http;
+        this.alertController = alertController;
         this.router = router;
         this.navCtrl = navCtrl;
         this.editbtn = false;
         this.persons = [];
-        let currentUser = localStorage.getItem('LoginData');
-        this.currentUser = JSON.parse(currentUser);
-        // console.log("CurentUser",this.currentUser);
-        this.userid = this.currentUser.user.uid;
+        if (localStorage.getItem('LoginData')) {
+            let currentUser = localStorage.getItem('LoginData');
+            this.currentUser = JSON.parse(currentUser);
+            console.log("CurentUser", this.currentUser);
+            this.userid = this.currentUser.user.uid;
+            console.log("this.userid", this.userid);
+        }
+        else {
+            this.loadCall();
+        }
+    }
+    loadCall() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Alert',
+                message: 'If you want to use <strong>Save Activity</strong>, you need to login',
+                backdropDismiss: false,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: () => {
+                            this.router.navigateByUrl('/dashboard');
+                        }
+                    }, {
+                        text: 'Login',
+                        handler: () => {
+                            // this.router.navigateByUrl('/login');
+                            this.navCtrl.navigateForward('login');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
     }
     ngOnInit() {
         this.loadPerson();
@@ -87,6 +120,7 @@ let SupportCirclePage = class SupportCirclePage {
 };
 SupportCirclePage.ctorParameters = () => [
     { type: src_app_services_http_service__WEBPACK_IMPORTED_MODULE_5__["HttpService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] }
 ];

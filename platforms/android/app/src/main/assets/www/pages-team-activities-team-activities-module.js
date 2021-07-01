@@ -131,8 +131,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TeamActivitiesPage = class TeamActivitiesPage {
-    constructor(http, navCtrl) {
+    constructor(http, alertController, navCtrl) {
         this.http = http;
+        this.alertController = alertController;
         this.navCtrl = navCtrl;
         this.postsexpolore = [];
         this.teams = [];
@@ -145,7 +146,9 @@ let TeamActivitiesPage = class TeamActivitiesPage {
     ;
     ;
     ngOnInit() {
-        this.loadActivity();
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.loadActivity();
+        });
     }
     ionViewWillEnter() {
         this.ngOnInit();
@@ -194,6 +197,7 @@ let TeamActivitiesPage = class TeamActivitiesPage {
 };
 TeamActivitiesPage.ctorParameters = () => [
     { type: src_app_services_http_service__WEBPACK_IMPORTED_MODULE_5__["HttpService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] }
 ];
 TeamActivitiesPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

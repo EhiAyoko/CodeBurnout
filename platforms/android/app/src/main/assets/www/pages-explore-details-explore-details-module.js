@@ -44,18 +44,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ExploreDetailsPage = class ExploreDetailsPage {
-    constructor(socialSharing, navctrl, router, http, authpostservice, afStore) {
+    constructor(socialSharing, navctrl, router, http, authpostservice, afStore, alertController) {
         this.socialSharing = socialSharing;
         this.navctrl = navctrl;
         this.router = router;
         this.http = http;
         this.authpostservice = authpostservice;
         this.afStore = afStore;
+        this.alertController = alertController;
         this.brandsdetails = '';
-        let currentUser = localStorage.getItem('LoginData');
-        this.currentUser = JSON.parse(currentUser);
-        // console.log("CurentUser",this.currentUser);
-        this.userid = this.currentUser.user.uid;
+        if (localStorage.getItem('LoginData')) {
+            let currentUser = localStorage.getItem('LoginData');
+            this.currentUser = JSON.parse(currentUser);
+            console.log("CurentUser", this.currentUser);
+            this.userid = this.currentUser.user.uid;
+            console.log("this.userid", this.userid);
+        }
+        else {
+            this.loadCall();
+        }
         const navigation = this.router.getCurrentNavigation();
         const state = navigation.extras.state;
         if (state != undefined) {
@@ -74,6 +81,32 @@ let ExploreDetailsPage = class ExploreDetailsPage {
                 // console.log('this is fir data', this.brandsdetails);
             });
         }
+    }
+    loadCall() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Alert',
+                message: 'If you want to use <strong>Save Activity</strong>, you need to login',
+                backdropDismiss: false,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: () => {
+                            this.router.navigateByUrl('/explore-activities');
+                        }
+                    }, {
+                        text: 'Login',
+                        handler: () => {
+                            // this.router.navigateByUrl('/login');
+                            this.navctrl.navigateForward('login');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
     }
     sShare(postimg, brandsdetails) {
         var options = {
@@ -207,7 +240,8 @@ ExploreDetailsPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
     { type: src_app_services_auth_authication_service__WEBPACK_IMPORTED_MODULE_7__["AuthicationService"] },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__["AngularFirestore"] }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__["AngularFirestore"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["AlertController"] }
 ];
 ExploreDetailsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
