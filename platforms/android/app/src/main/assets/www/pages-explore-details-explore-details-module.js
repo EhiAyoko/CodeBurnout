@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar mode=\"ios\">\n    <ion-buttons mode=\"md\" slot=\"start\">\n      <ion-back-button defaultHref=\"explore-activities\"></ion-back-button>\n    </ion-buttons>\n    <ion-title style=\"font-size: 10px;\">{{brandsdetails.fields.Name}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-margin\">\n    <div class=\"ion-text-center\" *ngFor=\"let postvideo of brandsdetails.fields.Video\"> \n      <video width=\"320\" height=\"240\" controls>\n        <source [src]=\"postvideo.url\" [type]=\"postvideo.type\">\n      </video>\n    </div>\n    <div *ngFor=\"let postimg of brandsdetails.fields.Featuredphoto\">\n    <div  >\n      <img [src]=\"postimg.url\">\n    </div>\n    <div class=\"ion-margin\">\n      <ion-text class=\"\">\n        {{brandsdetails.fields.Notes}}\n      </ion-text>\n    </div>\n    <ion-item class=\"brd\" lines=\"none\">\n      <ion-label>Save Activity</ion-label>\n      <ion-toggle mode=\"ios\" checked=\"{{brandsdetails.fields.Save === true ? true : false}}\" (ionChange)=\"firebaseEvent($event,brandsdetails,postimg,postvideo)\" color=\"warning\"></ion-toggle>\n    </ion-item>\n\n    <ion-item class=\"brd\" lines=\"none\" (click)=\"sSShare(brandsdetails,postimg)\">\n      <ion-label>Share</ion-label>\n      <ion-icon name=\"share-outline\"></ion-icon>\n    </ion-item>\n  </div>\n</div>\n\n\n<!-- <ion-item  class=\"align-items-center\" *ngFor=\"let record of records;\">\n  <ion-text >\n    {{record.Name}}\n  </ion-text>\n  <ion-button color=\"primary\" (click)=\"DeleteRecord(record.id)\">cancel</ion-button>\n</ion-item> -->\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar mode=\"ios\">\n    <ion-buttons mode=\"md\" slot=\"start\">\n      <ion-back-button defaultHref=\"explore-activities\"></ion-back-button>\n    </ion-buttons>\n    <ion-title style=\"font-size: 10px;\">{{brandsdetails.fields.Name}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-margin\">\n    <div class=\"ion-text-center\" *ngFor=\"let postvideo of brandsdetails.fields.Video\"> \n      <video width=\"320\" height=\"240\" controls>\n        <source [src]=\"postvideo.url\" [type]=\"postvideo.type\">\n      </video>\n    </div>\n    <div *ngFor=\"let postimg of brandsdetails.fields.Featuredphoto\">\n    <div  >\n      <img [src]=\"postimg.url\">\n    </div>\n    <div class=\"ion-margin\">\n      <ion-text class=\"\">\n        {{brandsdetails.fields.Notes}}\n      </ion-text>\n    </div>\n    <ion-item class=\"brd\" lines=\"none\">\n      <ion-label>Save Activity</ion-label>\n      <ion-toggle [(ngModel)]=\"saveActivity\" mode=\"ios\" (ionChange)=\"firebaseEvent($event,brandsdetails,postimg,postvideo)\" color=\"warning\"></ion-toggle>\n    </ion-item>\n\n    <ion-item class=\"brd\" lines=\"none\" (click)=\"sSShare(brandsdetails,postimg)\">\n      <ion-label>Share</ion-label>\n      <ion-icon name=\"share-outline\"></ion-icon>\n    </ion-item>\n  </div>\n</div>\n\n\n<!-- <ion-item  class=\"align-items-center\" *ngFor=\"let record of records;\">\n  <ion-text >\n    {{record.Name}}\n  </ion-text>\n  <ion-button color=\"primary\" (click)=\"DeleteRecord(record.id)\">cancel</ion-button>\n</ion-item> -->\n</ion-content>\n");
 
 /***/ }),
 
@@ -53,15 +53,13 @@ let ExploreDetailsPage = class ExploreDetailsPage {
         this.afStore = afStore;
         this.alertController = alertController;
         this.brandsdetails = '';
-        if (localStorage.getItem('LoginData')) {
+        this.saveActivity = false;
+        if (localStorage.getItem('LoginData') != null) {
             let currentUser = localStorage.getItem('LoginData');
             this.currentUser = JSON.parse(currentUser);
             console.log("CurentUser", this.currentUser);
             this.userid = this.currentUser.user.uid;
             console.log("this.userid", this.userid);
-        }
-        else {
-            this.loadCall();
         }
         const navigation = this.router.getCurrentNavigation();
         const state = navigation.extras.state;
@@ -73,10 +71,10 @@ let ExploreDetailsPage = class ExploreDetailsPage {
                 // console.log('doc', doc)
                 if (doc.exists) {
                     // console.log("Document data:", doc.data());
-                    this.brandsdetails.fields.Save = true;
+                    this.saveActivity = true;
                 }
                 else {
-                    this.brandsdetails.fields.Save = false;
+                    this.saveActivity = false;
                 }
                 // console.log('this is fir data', this.brandsdetails);
             });
@@ -179,43 +177,51 @@ let ExploreDetailsPage = class ExploreDetailsPage {
     }
     firebaseEvent(val, value, postimg, postvideo) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+        if (localStorage.getItem('LoginData')) {
+            let currentUser = localStorage.getItem('LoginData');
+            this.currentUser = JSON.parse(currentUser);
+            console.log("CurentUser", this.currentUser);
+            this.userid = this.currentUser.user.uid;
+            console.log("this.userid", this.userid);
+            if (val.detail.checked === true) {
+                let addrecord = {};
+                addrecord['id'] = (_a = this.brandsdetails) === null || _a === void 0 ? void 0 : _a.id;
+                if (this.brandsdetails && ((_b = this.brandsdetails) === null || _b === void 0 ? void 0 : _b.fields.Name) != undefined) {
+                    addrecord['Name'] = (_d = (_c = this.brandsdetails) === null || _c === void 0 ? void 0 : _c.fields) === null || _d === void 0 ? void 0 : _d.Name;
+                }
+                addrecord['uid'] = this.userid;
+                if (this.brandsdetails && ((_e = this.brandsdetails) === null || _e === void 0 ? void 0 : _e.fields.Notes) != undefined) {
+                    addrecord['Notes'] = (_g = (_f = this.brandsdetails) === null || _f === void 0 ? void 0 : _f.fields) === null || _g === void 0 ? void 0 : _g.Notes;
+                }
+                if (this.brandsdetails && ((_h = this.brandsdetails) === null || _h === void 0 ? void 0 : _h.fields.TypeOfActivity) != undefined) {
+                    addrecord['TypeOfActivity'] = (_k = (_j = this.brandsdetails) === null || _j === void 0 ? void 0 : _j.fields) === null || _k === void 0 ? void 0 : _k.TypeOfActivity;
+                }
+                if (this.brandsdetails && (postimg === null || postimg === void 0 ? void 0 : postimg.url) != undefined) {
+                    addrecord['url'] = postimg === null || postimg === void 0 ? void 0 : postimg.url;
+                }
+                if (this.brandsdetails.fields.Video != undefined) {
+                    addrecord['Video'] = (_o = (_m = (_l = this.brandsdetails) === null || _l === void 0 ? void 0 : _l.fields) === null || _m === void 0 ? void 0 : _m.Video[0]) === null || _o === void 0 ? void 0 : _o.url;
+                    // console.log('video', this.brandsdetails?.fields?.Video[0]?.url)
+                }
+                // console.log(addrecord)
+                this.afStore
+                    .collection('Explore_activities_saved/' + this.userid + '/activity')
+                    .doc(this.brandsdetails.id)
+                    .set(addrecord).then(() => {
+                    this.addrecord = { type: '', description: '', amount: null };
+                    // this.afStore.collection('Records').doc().set({id: '' , name:'hamza'})
+                });
+            }
+            else {
+                if (val.detail.checked === false) {
+                    this.afStore.doc('/Explore_activities_saved/' + this.userid + '/activity/' + value.id).delete();
+                }
+            }
+        }
+        else if (this.userid == undefined) {
+            this.loadCall();
+        }
         this.brandsdetails;
-        // console.log("vslueOfToggle",val.detail.checked)
-        // console.log("vslueOfObj",value);
-        if (val.detail.checked === true) {
-            let addrecord = {};
-            addrecord['id'] = (_a = this.brandsdetails) === null || _a === void 0 ? void 0 : _a.id;
-            if (this.brandsdetails && ((_b = this.brandsdetails) === null || _b === void 0 ? void 0 : _b.fields.Name) != undefined) {
-                addrecord['Name'] = (_d = (_c = this.brandsdetails) === null || _c === void 0 ? void 0 : _c.fields) === null || _d === void 0 ? void 0 : _d.Name;
-            }
-            addrecord['uid'] = this.userid;
-            if (this.brandsdetails && ((_e = this.brandsdetails) === null || _e === void 0 ? void 0 : _e.fields.Notes) != undefined) {
-                addrecord['Notes'] = (_g = (_f = this.brandsdetails) === null || _f === void 0 ? void 0 : _f.fields) === null || _g === void 0 ? void 0 : _g.Notes;
-            }
-            if (this.brandsdetails && ((_h = this.brandsdetails) === null || _h === void 0 ? void 0 : _h.fields.TypeOfActivity) != undefined) {
-                addrecord['TypeOfActivity'] = (_k = (_j = this.brandsdetails) === null || _j === void 0 ? void 0 : _j.fields) === null || _k === void 0 ? void 0 : _k.TypeOfActivity;
-            }
-            if (this.brandsdetails && (postimg === null || postimg === void 0 ? void 0 : postimg.url) != undefined) {
-                addrecord['url'] = postimg === null || postimg === void 0 ? void 0 : postimg.url;
-            }
-            if (this.brandsdetails.fields.Video != undefined) {
-                addrecord['Video'] = (_o = (_m = (_l = this.brandsdetails) === null || _l === void 0 ? void 0 : _l.fields) === null || _m === void 0 ? void 0 : _m.Video[0]) === null || _o === void 0 ? void 0 : _o.url;
-                // console.log('video', this.brandsdetails?.fields?.Video[0]?.url)
-            }
-            // console.log(addrecord)
-            this.afStore
-                .collection('Explore_activities_saved/' + this.userid + '/activity')
-                .doc(this.brandsdetails.id)
-                .set(addrecord).then(() => {
-                this.addrecord = { type: '', description: '', amount: null };
-                // this.afStore.collection('Records').doc().set({id: '' , name:'hamza'})
-            });
-        }
-        else {
-            if (val.detail.checked === false) {
-                this.afStore.doc('/Explore_activities_saved/' + this.userid + '/activity/' + value.id).delete();
-            }
-        }
     }
     DeleteRecord(id) {
         this.afStore.doc('/Explore_activities_saved/' + id).delete();

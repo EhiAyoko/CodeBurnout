@@ -25,7 +25,7 @@
     </div>
     <ion-item class="brd" lines="none">
       <ion-label>Save Activity</ion-label>
-      <ion-toggle [(ngModel)]="saveActivity" mode="ios" (ionChange)="firebaseEvent($event,brandsdetails,postimg,postvideo)" color="warning"></ion-toggle>
+      <ion-toggle [(ngModel)]="saveActivity" mode="ios" checked="{{brandsdetails.fields.Save === true ? true : false}}" (ionChange)="firebaseEvent($event,brandsdetails,postimg,postvideo)" color="warning"></ion-toggle>
     </ion-item>
 
     <ion-item class="brd" lines="none" (click)="sSShare(brandsdetails,postimg)">

@@ -25,8 +25,6 @@ export class TeamDetailsPage implements OnInit {
   vidoeget: any;
   uuid: any;
   null: string;
-  isSave : boolean;
-  saveActivity: boolean = false;
   constructor(
     private router: Router,
     private navCtrl: NavController,
@@ -39,34 +37,34 @@ export class TeamDetailsPage implements OnInit {
     private authpostservice: AuthicationService,
     public actionSheetController: ActionSheetController
     ) {  
-  
-      if(localStorage.getItem('LoginData') != null){
-        let currentUser = localStorage.getItem('LoginData');
-        this.currentUser = JSON.parse(currentUser);
-        console.log("CurentUser", this.currentUser);
-        this.userid = this.currentUser.user.uid;
-        console.log("this.userid", this.userid);
-      }
+  // if(localStorage.getItem('LoginData')){
+  //   let currentUser = localStorage.getItem('LoginData');
+  //   this.currentUser = JSON.parse(currentUser);
+  //   console.log("CurentUser", this.currentUser);
+  //   this.userid = this.currentUser.user.uid;
+  //   console.log("this.userid", this.userid);
+  // }else{
+  //  this.loadCall()
+  // }
+
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {
       item,
     };
-    if (state != undefined ) {
+    if (state != undefined) {
       this.brandsdetails = state.item;
       this.authpostservice.getActivity(this.userid, this.brandsdetails.id)
         .then(doc => {
           // console.log('doc', doc)
           if (doc.exists) {
-            console.log("Document data:", doc.data());
-            this.saveActivity = true;
+            // console.log("Document data:", doc.data());
+            this.brandsdetails.fields.Save = true;
           } else {
-            this.saveActivity = false;
+            this.brandsdetails.fields.Save = false;
           }
           // console.log('this is fir data', this.brandsdetails);
         });
-      
     }
-
   }
 
 async loadCall(){
@@ -94,9 +92,7 @@ async loadCall(){
     await alert.present();
   }
 
-  ngOnInit() {
-   
-   }
+  ngOnInit() { }
 
   async sShare(brandsdetails,postimg){
     // console.log('brandsdetails', brandsdetails)
@@ -174,63 +170,57 @@ async loadCall(){
   }
 
   firebaseEvent(val, value, postimg) {
-    // console.log('saveActivity', this.saveActivity)
-    // console.log('value', value)
     if(localStorage.getItem('LoginData')){
       let currentUser = localStorage.getItem('LoginData');
       this.currentUser = JSON.parse(currentUser);
       console.log("CurentUser", this.currentUser);
       this.userid = this.currentUser.user.uid;
       console.log("this.userid", this.userid);
-
-      if (val.detail.checked === true) {
-        let addrecord = {}
-        addrecord['id'] = this.brandsdetails?.id
-        if (this.brandsdetails && this.brandsdetails?.fields.Name != undefined) {
-          addrecord['Name'] = this.brandsdetails?.fields?.Name
-        }
-        addrecord['uid'] = this.userid
-        if (this.brandsdetails && this.brandsdetails?.fields.description != undefined) {
-          addrecord['description'] = this.brandsdetails?.fields?.description
-        }
-        if (this.brandsdetails && this.brandsdetails?.fields.TypeOfActivity != undefined) {
-          addrecord['TypeOfActivity'] = this.brandsdetails?.fields?.TypeOfActivity
-        }
-        if (this.brandsdetails && this.brandsdetails?.fields.ActivityCategory != undefined) {
-          addrecord['ActivityCategory'] = this.brandsdetails?.fields?.ActivityCategory
-        }
-        if (this.brandsdetails && this.brandsdetails?.fields.ActivityCategory != undefined) {
-          addrecord['ActivityCategory'] = this.brandsdetails?.fields?.ActivityCategory
-        }
-        if (this.brandsdetails && postimg?.url != undefined) {
-          addrecord['url'] = postimg?.url
-        }
-        if (this.brandsdetails.fields.Video != undefined) {
-          addrecord['Video'] = this.brandsdetails?.fields?.Video[0]?.url
-      // console.log('video', this.brandsdetails?.fields?.Video[0]?.url)
-        }
-  
-        this.afStore
-          .collection('Team_activities_saved/' + this.userid + '/activity')
-          .doc(this.brandsdetails.id)
-          .set(addrecord).then(() => {
-            this.addrecord = { type: '', description: '', amount: null }
-          });
-      }
-      else {
-        if (val.detail.checked === false) {
-          this.afStore.doc('/Team_activities_saved/' + this.userid + '/activity/' + value.id).delete()
-        }
-      }
-    }else if(this.userid == undefined){
-      
+    }else{
      this.loadCall()
     }
     
     this.brandsdetails
-    
-  }
+    if (val.detail.checked === true) {
+      let addrecord = {}
+      addrecord['id'] = this.brandsdetails?.id
+      if (this.brandsdetails && this.brandsdetails?.fields.Name != undefined) {
+        addrecord['Name'] = this.brandsdetails?.fields?.Name
+      }
+      addrecord['uid'] = this.userid
+      if (this.brandsdetails && this.brandsdetails?.fields.description != undefined) {
+        addrecord['description'] = this.brandsdetails?.fields?.description
+      }
+      if (this.brandsdetails && this.brandsdetails?.fields.TypeOfActivity != undefined) {
+        addrecord['TypeOfActivity'] = this.brandsdetails?.fields?.TypeOfActivity
+      }
+      if (this.brandsdetails && this.brandsdetails?.fields.ActivityCategory != undefined) {
+        addrecord['ActivityCategory'] = this.brandsdetails?.fields?.ActivityCategory
+      }
+      if (this.brandsdetails && this.brandsdetails?.fields.ActivityCategory != undefined) {
+        addrecord['ActivityCategory'] = this.brandsdetails?.fields?.ActivityCategory
+      }
+      if (this.brandsdetails && postimg?.url != undefined) {
+        addrecord['url'] = postimg?.url
+      }
+      if (this.brandsdetails.fields.Video != undefined) {
+        addrecord['Video'] = this.brandsdetails?.fields?.Video[0]?.url
+    // console.log('video', this.brandsdetails?.fields?.Video[0]?.url)
+      }
 
+      this.afStore
+        .collection('Team_activities_saved/' + this.userid + '/activity')
+        .doc(this.brandsdetails.id)
+        .set(addrecord).then(() => {
+          this.addrecord = { type: '', description: '', amount: null }
+        });
+    }
+    else {
+      if (val.detail.checked === false) {
+        this.afStore.doc('/Team_activities_saved/' + this.userid + '/activity/' + value.id).delete()
+      }
+    }
+  }
 
   DeleteRecord(id) {
     this.afStore.doc('/Team_activities_saved/' + id).delete()

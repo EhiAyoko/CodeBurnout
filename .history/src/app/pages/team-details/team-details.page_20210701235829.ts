@@ -174,8 +174,9 @@ async loadCall(){
   }
 
   firebaseEvent(val, value, postimg) {
-    // console.log('saveActivity', this.saveActivity)
-    // console.log('value', value)
+    
+    console.log('saveActivity', this.saveActivity)
+    console.log('value', value)
     if(localStorage.getItem('LoginData')){
       let currentUser = localStorage.getItem('LoginData');
       this.currentUser = JSON.parse(currentUser);

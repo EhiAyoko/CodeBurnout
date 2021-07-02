@@ -25,8 +25,6 @@ export class TeamDetailsPage implements OnInit {
   vidoeget: any;
   uuid: any;
   null: string;
-  isSave : boolean;
-  saveActivity: boolean = false;
   constructor(
     private router: Router,
     private navCtrl: NavController,
@@ -39,14 +37,16 @@ export class TeamDetailsPage implements OnInit {
     private authpostservice: AuthicationService,
     public actionSheetController: ActionSheetController
     ) {  
-  
-      if(localStorage.getItem('LoginData') != null){
-        let currentUser = localStorage.getItem('LoginData');
-        this.currentUser = JSON.parse(currentUser);
-        console.log("CurentUser", this.currentUser);
-        this.userid = this.currentUser.user.uid;
-        console.log("this.userid", this.userid);
-      }
+  // if(localStorage.getItem('LoginData')){
+  //   let currentUser = localStorage.getItem('LoginData');
+  //   this.currentUser = JSON.parse(currentUser);
+  //   console.log("CurentUser", this.currentUser);
+  //   this.userid = this.currentUser.user.uid;
+  //   console.log("this.userid", this.userid);
+  // }else{
+  //  this.loadCall()
+  // }
+
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {
       item,
@@ -57,10 +57,10 @@ export class TeamDetailsPage implements OnInit {
         .then(doc => {
           // console.log('doc', doc)
           if (doc.exists) {
-            console.log("Document data:", doc.data());
-            this.saveActivity = true;
+            // console.log("Document data:", doc.data());
+            this.brandsdetails.fields.Save = true;
           } else {
-            this.saveActivity = false;
+            this.brandsdetails.fields.Save = false;
           }
           // console.log('this is fir data', this.brandsdetails);
         });
@@ -174,8 +174,6 @@ async loadCall(){
   }
 
   firebaseEvent(val, value, postimg) {
-    // console.log('saveActivity', this.saveActivity)
-    // console.log('value', value)
     if(localStorage.getItem('LoginData')){
       let currentUser = localStorage.getItem('LoginData');
       this.currentUser = JSON.parse(currentUser);
@@ -183,7 +181,7 @@ async loadCall(){
       this.userid = this.currentUser.user.uid;
       console.log("this.userid", this.userid);
 
-      if (val.detail.checked === true) {
+      if (val.detail.checked === false) {
         let addrecord = {}
         addrecord['id'] = this.brandsdetails?.id
         if (this.brandsdetails && this.brandsdetails?.fields.Name != undefined) {
@@ -222,15 +220,13 @@ async loadCall(){
           this.afStore.doc('/Team_activities_saved/' + this.userid + '/activity/' + value.id).delete()
         }
       }
-    }else if(this.userid == undefined){
-      
+    }else{
      this.loadCall()
     }
     
     this.brandsdetails
     
   }
-
 
   DeleteRecord(id) {
     this.afStore.doc('/Team_activities_saved/' + id).delete()
