@@ -3,15 +3,13 @@
     <ion-buttons mode="md" slot="start">
       <ion-back-button [text]="login" defaultHref="team-details"></ion-back-button>
     </ion-buttons>
-    <ion-title> {{brandsdetails.fields.Name}}</ion-title>
+    <ion-title style="font-size: 18px;"> {{brandsdetails.fields.Name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-margin" *ngFor="let postimg of brandsdetails.fields.FeaturedPhoto">
-    <div class="img-size ion-text-center">
     <img [src]="postimg.url">
-    </div>
     <div class="ion-text-center" *ngFor="let postvideo of brandsdetails.fields.Video" > 
         <video width="320" height="240" controls>
           <source [src]="postvideo.url" [type]="postvideo.type">

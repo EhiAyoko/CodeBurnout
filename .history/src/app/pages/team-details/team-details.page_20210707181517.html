@@ -9,9 +9,7 @@
 
 <ion-content>
   <div class="ion-margin" *ngFor="let postimg of brandsdetails.fields.FeaturedPhoto">
-    <div class="img-size ion-text-center">
     <img [src]="postimg.url">
-    </div>
     <div class="ion-text-center" *ngFor="let postvideo of brandsdetails.fields.Video" > 
         <video width="320" height="240" controls>
           <source [src]="postvideo.url" [type]="postvideo.type">
